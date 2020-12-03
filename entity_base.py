@@ -11,11 +11,11 @@ class Entity():
 
     def attack_roll(self):
         # return attack roll
-        return d6(attack)
+        return d6(self.attack)
 
     def evade_roll(self):
         # return evasion roll
-        return d6(flexibility)
+        return d6(self.flexibility)
 
     def take_hit(self):
         # reduce HP by 1
