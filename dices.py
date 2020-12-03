@@ -2,7 +2,7 @@ import random
 
 class Dices:
 
-    def dice_sim(self, rolls):
+    def d6(self, rolls):
         total_sum = 0
 
         for i in range(rolls):
