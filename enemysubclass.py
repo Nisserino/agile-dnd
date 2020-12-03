@@ -1,5 +1,6 @@
 class Entity:
-pass
+    pass
+
 
 class Giantspider(Entity):
     def __init__(self):
