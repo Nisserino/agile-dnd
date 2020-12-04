@@ -7,3 +7,13 @@ class GameBoard:
     def print_board(self, board):
         for r in board:
             print(" ".join(r))
+
+    def add_marker(self, board, cord, marker):
+        board[cord[0]][cord[1]] = marker
+        return board
+
+
+
+
+
+
