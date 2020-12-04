@@ -8,6 +8,7 @@ class Entity():
         self.attack = attack
         self.flexibility = flexibility
         self.position = [0, 0]
+        self.board_size = 0
 
     def attack_roll(self):
         # return attack roll
