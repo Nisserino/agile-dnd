@@ -1,4 +1,5 @@
 from dices import d6
+import random
 
 
 class Entity():
@@ -21,6 +22,17 @@ class Entity():
     def take_hit(self):
         # reduce HP by 1
         self.endurance -= 1
+
+    def initiative_roll(self):
+        # roll for initiative
+        return d6(self.initiativ)
+
+    def escape_roll(self):
+        # Returns bool for escape attemt
+        escape = False
+        if random.randint(1, 10) <= self.flexibility:
+            escape = True
+        return escape
 
     def move(self):
         pass
