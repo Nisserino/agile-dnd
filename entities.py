@@ -2,14 +2,36 @@ from dices import Dices
 import random
 
 
-class Entity():
-    def __init__(self, initiativ, endurance, attack, flexibility):
-        self.initiativ = initiativ
-        self.endurance = endurance
-        self.attack = attack
-        self.flexibility = flexibility
-        self.position = [0, 0]
-        self.board_size = 0
+class Movement():
+    def __init__(self):
+        self.position = [0, 0]  # top left corner as base start pos
+        self.board_size = 4  # Boardsize set to 4 as base value
+        self.options = []
+        self.check_options()
+
+    def check_options(self):
+        option = []
+        # y
+        if self.position[0] + 1 <= self.board_size - 1:  # position 0 indexed
+            option.append('South')
+        if self.position[0] - 1 >= 0:
+            option.append('North')
+        # x
+        if self.position[1] + 1 <= self.board_size - 1:
+            option.append('East')
+        if self.position[1] - 1 >= 0:
+            option.append('West')
+        self.options = option
+
+    def move(self, axle, direction):
+        # Axle x or y (0 or 1), direction = 1 or -1
+        self.position[axle] += direction
+
+
+class Entity(Movement):
+    # Contains character funcs such as attacking, aswell as holds the movement
+    def __init__(self):
+        super().__init__()
 
     def attack_roll(self):
         # return attack roll
@@ -34,13 +56,11 @@ class Entity():
             escape = True
         return escape
 
-    def move(self):
-        pass
-
 
 # Hero classes
 class Rider(Entity):
     def __init__(self):
+        super().__init__()
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
@@ -49,6 +69,7 @@ class Rider(Entity):
 
 class Wizard(Entity):
     def __init__(self):
+        super().__init__()
         self.initiativ = 6
         self.endurance = 4
         self.attack = 9
@@ -57,6 +78,7 @@ class Wizard(Entity):
 
 class Thief(Entity):
     def __init__(self):
+        super().__init__()
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
