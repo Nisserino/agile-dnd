@@ -39,7 +39,7 @@ class Entity(Movement):
 
     def evade_roll(self):
         # return evasion roll
-        return Dices.d6(self.flexibility)
+        return Dices.d6(self.agility)
 
     def take_hit(self):
         # reduce HP by 1
@@ -52,7 +52,7 @@ class Entity(Movement):
     def escape_roll(self):
         # Returns bool for escape attemt
         escape = False
-        if random.randint(1, 10) <= self.flexibility:
+        if random.randint(1, 10) <= self.agility:
             escape = True
         return escape
 
@@ -64,7 +64,7 @@ class Rider(Entity):
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
-        self.flexibility = 4
+        self.agility = 4
 
 
 class Wizard(Entity):
@@ -73,7 +73,7 @@ class Wizard(Entity):
         self.initiativ = 6
         self.endurance = 4
         self.attack = 9
-        self.flexibility = 5
+        self.agility = 5
 
 
 class Thief(Entity):
@@ -82,7 +82,7 @@ class Thief(Entity):
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
-        self.flexibility = 4
+        self.agility = 4
 
 
 # Enemy classes
@@ -91,7 +91,7 @@ class Giantspider(Entity):
         self.initiativ = 7
         self.endurance = 9
         self.attack = 2
-        self.flexibility = 3
+        self.agility = 3
 
 
 class Skeleton(Entity):
@@ -99,7 +99,7 @@ class Skeleton(Entity):
         self.initiativ = 4
         self.endurance = 2
         self.attack = 3
-        self.flexibility = 3
+        self.agility = 3
 
 
 class Orc(Entity):
@@ -107,7 +107,7 @@ class Orc(Entity):
         self.initiativ = 6
         self.endurance = 3
         self.attack = 4
-        self.flexibility = 4
+        self.agility = 4
 
 
 class Troll(Entity):
@@ -115,4 +115,4 @@ class Troll(Entity):
         self.initiativ = 2
         self.endurance = 4
         self.attack = 7
-        self.flexibility = 2
+        self.agility = 2
