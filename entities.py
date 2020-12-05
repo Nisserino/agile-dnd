@@ -58,7 +58,7 @@ class Entity(Movement):
 
 
 # Hero classes
-class Rider(Entity):
+class Knight(Entity):
     def __init__(self):
         super().__init__()
         self.initiativ = 5
