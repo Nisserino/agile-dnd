@@ -139,3 +139,6 @@ cython_debug/
 
 # Custom
 .vscode/
+demo.py
+combat.py
+SpawnMonster.py
