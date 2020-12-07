@@ -8,13 +8,13 @@ class Entity:
         self.flexibility = flexibility
         self.heroType = heroType
 
-class Rider(Entity):
+class Knight(Entity):
     def __init__(self):
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
         self.lexibility = 4
-        self.heroType ='Rider'
+        self.heroType ='Knight'
 
     def blockAttack(self):
         pass
