@@ -1,12 +1,14 @@
 import random
 
+
 class Entity:
     def __init__(self, initiativ, endurance, attack, flexibility, heroType):
         self.initiativ = initiativ
         self.endurance = endurance
         self.attack = attack
         self.flexibility = flexibility
-        self.heroType = heroType
+        self.heroType = ''
+
 
 class Knight(Entity):
     def __init__(self):
@@ -17,7 +19,7 @@ class Knight(Entity):
         self.heroType ='Knight'
 
     def blockAttack(self):
-        pass
+        pass #return combat loop/ The Knight has first fist always
         
 
 class Wizard(Entity):
@@ -29,7 +31,7 @@ class Wizard(Entity):
         self.heroType ='Wizard'
 
     def blindness(self):
-        if random.randrange(0, 10) <= 8:
+        if random.randrange(0, 100) <= 80:
             print("Player escaped from room!")
         
 
@@ -43,5 +45,5 @@ class Thief(Entity):
 
     def dubbelAward(self):
         if random.randint(1, 4) == 4:
-            dungeonAward = dungeonAward * 2
-            print(f"Player gets 2X COINS = {dungeonAward}") #How we'll handle taxes?
+            Treasure.treasures = Treasure.treasures * 2
+            print(f"Player gets 2X COINS = {Treasure.treasures}")
