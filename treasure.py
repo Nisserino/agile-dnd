@@ -1,10 +1,10 @@
 import random
 
+
 class Treasure:
 
     def __init__(self):
         self.treasures_rolled = []
-
 
     def treasure_randomizer(self):
         treasures = {
@@ -19,5 +19,5 @@ class Treasure:
             for j, k in treasures[i].items():
                 if random.randint(1, 100) <= j:
                     self.treasures_rolled.append([i, k])
-        
+
         return self.treasures_rolled
