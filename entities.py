@@ -7,7 +7,7 @@ class Movement():
         self.position = [0, 0]  # top left corner as base start pos
         self.board_size = 4  # Boardsize set to 4 as base value
         self.options = []
-        self.check_options()
+
 
     def check_options(self):
         option = []
