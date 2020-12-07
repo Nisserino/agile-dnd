@@ -1,5 +1,6 @@
 import random
 
+
 class Dices:
 
     def d6(self, rolls):
@@ -8,4 +9,3 @@ class Dices:
         for i in range(rolls):
             total_sum += random.randint(1, 6)
         return total_sum
-
