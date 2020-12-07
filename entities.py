@@ -92,6 +92,7 @@ class Giantspider(Entity):
         self.endurance = 9
         self.attack = 2
         self.agility = 3
+        self.chance = 20
 
 
 class Skeleton(Entity):
@@ -100,6 +101,7 @@ class Skeleton(Entity):
         self.endurance = 2
         self.attack = 3
         self.agility = 3
+        self.chance = 15
 
 
 class Orc(Entity):
@@ -108,6 +110,7 @@ class Orc(Entity):
         self.endurance = 3
         self.attack = 4
         self.agility = 4
+        self.chance = 10
 
 
 class Troll(Entity):
@@ -116,3 +119,4 @@ class Troll(Entity):
         self.endurance = 4
         self.attack = 7
         self.agility = 2
+        self.chance = 5
