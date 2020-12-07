@@ -1,18 +1,15 @@
 class ChCreation:
-    def __init__(self, username, choice, hero):
-        self.username = username
-        self.choice = choice
+    def __init__(self, username, hero):
+        self.username = ''
         self.hero = hero
     
     def user(self):
-        self.username = input('Whats your username?')
-        print(f'Welcome to Dungeons and Dragons {self.username}!')
-        
-        self.choice = input('Whats your choice')
-        if self.choice == 'Rider':#1
-            self.hero = Rider()
-        elif self.choice == 'Wizard':#2
+        if Entity.heroType == 'Knight':#1
+            self.hero = Knight()
+        elif Entity.heroType == 'Wizard':#2
             self.hero == Wizard()
-        elif self.choice == 'Thief':#3
+        elif Entity.heroType == 'Thief':#3
             self.hero == Thief()
+
+        return FileHandler.save(self.username, self.hero)
 
