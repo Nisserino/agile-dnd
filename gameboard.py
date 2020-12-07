@@ -11,9 +11,3 @@ class GameBoard:
     def add_marker(self, board, cord, marker):
         board[cord[0]][cord[1]] = marker
         return board
-
-
-
-
-
-
