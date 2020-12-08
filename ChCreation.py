@@ -1,15 +1,19 @@
-class ChCreation:
-    def __init__(self, username, hero):
+import entities as e
+import saveLoad as s
+
+
+class CharacterCreation:
+    def __init__(self, username, hero, choice):
         self.username = ''
-        self.hero = hero
-    
+        self.hero = None
+        self.choice = choice
+
     def user(self):
-        if Entity.heroType == 'Knight':#1
-            self.hero = Knight()
-        elif Entity.heroType == 'Wizard':#2
-            self.hero == Wizard()
-        elif Entity.heroType == 'Thief':#3
-            self.hero == Thief()
+        if self.choice == 'Knight':
+            self.hero = e.Knight()
+        elif self.choice == 'Wizard':
+            self.hero = e.Wizard()
+        elif self.choice == 'Thief':
+            self.hero = e.Thief()
 
-        return FileHandler.save(self.username, self.hero)
-
+        s.FileHandler.save(self.username, self.hero)
