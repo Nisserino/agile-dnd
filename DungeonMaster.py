@@ -14,15 +14,14 @@ class DungeonMaster:
 
     def current_room(self, pos: list):
         if self.room_status[pos] != 'clear':
-            enemies = self.room_status[pos][0]
-            treasures = self.room_status[pos][1]
-            return (True, self.print_room_status(treasures, enemies))
+            return (True, self.print_room_status(pos))
 
         elif self.room_status[pos] == 'clear':
             return (False, 'Room is empty')
 
         else:
-            return (True, self.print_room_status(treasures, enemies))
+            self.entity_spawner(pos)
+            return (True, self.print_room_status(pos))
 
     def entity_spawner(self, pos: list):
         enemies = []
@@ -37,8 +36,8 @@ class DungeonMaster:
     def combat(self):
         pass
 
-    def print_room_status(self, treasures_list: list, enemies_list: list):
-        treasures = ', '.join(treasures_list)
-        enemies = ', '.join(enemies_list)
+    def print_room_status(self, pos: list):
+        treasures = ', '.join(self.room_status[pos][1])
+        enemies = ', '.join(self.room_status[pos][0])
         room = f'Enemies: {enemies}\nTreasurs: {treasures}'
         return room
