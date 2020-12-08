@@ -30,7 +30,7 @@ class CharacterCreationLoop(cmd.Cmd):
 
     def __init__(self):
         super().__init__()
-        self.taken_names = ('pelle')
+        self.taken_names = ('pelle')  # test name, will get replaced
 
     def do_wizard(self, arg):
         'Create a wizard'
