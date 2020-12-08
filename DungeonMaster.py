@@ -19,7 +19,7 @@ class DungeonMaster:
             return (True, self.print_room_status(treasures, enemies))
 
         elif self.room_status[pos] == 'clear':
-            return False, 'Room is empty'
+            return (False, 'Room is empty')
 
         else:
             return (True, self.print_room_status(treasures, enemies))
