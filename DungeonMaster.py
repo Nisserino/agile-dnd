@@ -10,10 +10,14 @@ class DungeonMaster:
         self.play_area = GameBoard.create_board(size)
         self.player = player
         self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
-        self.room_status = {}
+        self.room_status = {}  # {'pos': }
 
     def current_room(self, pos, status):
         if status[pos]:
+            enemies = status[pos][0]
+            treasures = status[pos][1]
+
+        else:
             enemies = self.npc_spawner()
             treasures = Treasure()
 
