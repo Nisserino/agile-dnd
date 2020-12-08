@@ -47,21 +47,25 @@ class GameLoop(cmd.Cmd):
         'Walk north'
         if self.check_move('North'):
             self.dm.player.move(0, -1)
+            return True
 
     def do_south(self, arg):
         'Walk south'
         if self.check_move('South'):
             self.dm.player.move(0, 1)
+            return True
 
     def do_west(self, arg):
         'Walk west'
         if self.check_move('West'):
             self.dm.player.move(1, -1)
+            return True
 
     def do_east(self, arg):
         'Walk East'
         if self.check_move('East'):
             self.dm.player.move(1, 1)
+            return True
 
     def do_directions(self, arg):
         'Check which directions you can walk in'
