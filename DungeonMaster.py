@@ -12,10 +12,10 @@ class DungeonMaster:
         self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
         self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
 
-    def current_room(self, pos: list, status: dict):
-        if status[pos]:
-            enemies = status[pos][0]
-            treasures = status[pos][1]
+    def current_room(self, pos: list):
+        if self.room_status[pos]:
+            enemies = self.room_status[pos][0]
+            treasures = self.room_status[pos][1]
 
         else:
             enemies = self.npc_spawner()
