@@ -61,6 +61,7 @@ class Entity(Movement):
 class Knight(Entity):
     def __init__(self):
         super().__init__()
+        self.name = 'Knight'
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
@@ -70,6 +71,7 @@ class Knight(Entity):
 class Wizard(Entity):
     def __init__(self):
         super().__init__()
+        self.name = 'Wizard'
         self.initiativ = 6
         self.endurance = 4
         self.attack = 9
@@ -79,6 +81,7 @@ class Wizard(Entity):
 class Thief(Entity):
     def __init__(self):
         super().__init__()
+        self.name = 'Thief'
         self.initiativ = 5
         self.endurance = 9
         self.attack = 6
@@ -88,6 +91,7 @@ class Thief(Entity):
 # Enemy classes
 class Giantspider(Entity):
     def __init__(self):
+        self.name = 'Giant spider'
         self.initiativ = 7
         self.endurance = 9
         self.attack = 2
@@ -97,6 +101,7 @@ class Giantspider(Entity):
 
 class Skeleton(Entity):
     def __init__(self):
+        self.name = 'Skeleton'
         self.initiativ = 4
         self.endurance = 2
         self.attack = 3
@@ -106,6 +111,7 @@ class Skeleton(Entity):
 
 class Orc(Entity):
     def __init__(self):
+        self.name = 'Orc'
         self.initiativ = 6
         self.endurance = 3
         self.attack = 4
@@ -115,6 +121,7 @@ class Orc(Entity):
 
 class Troll(Entity):
     def __init__(self):
+        self.name = 'Troll'
         self.initiativ = 2
         self.endurance = 4
         self.attack = 7
