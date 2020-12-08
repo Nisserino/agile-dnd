@@ -6,7 +6,7 @@ import random
 
 class DungeonMaster:
     def __init__(self, size: int, player: entities.Entity):
-        self.play_area = GameBoard.create_board(size)
+        self.play_area = GameBoard().create_board(size)
         self.player = player
         self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
         self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
