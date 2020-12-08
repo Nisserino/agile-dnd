@@ -1,44 +1,44 @@
 import cmd
 from DungeonMaster import DungeonMaster
 
-"""
-create class that starts up dungeon master, and is able to send it on
-this in order to keep DM alive thoroughout the game
-so that we can save all relevant player info between movement and combat
-"""
 
-
-class Bouncer():
-    def __init__(self, player, username, size, start, dm):
+class Startup():
+    def __init__(self, player, username, size, start):
         self.dm = DungeonMaster(size, player)
         self.dm.player.position = start
         self.username = username  # Might just dunk this var into entities
-        self.test()
+        self.start_loop()
 
-    def test(self):
-        GameLoop(4, player, username)
+    def start_loop(self):
+        Bouncer(self.dm, self.username, 'move')
 
 
+class Bouncer():
+    def __init__(self, dm, username, action):
+        self.dm = dm
+        self.username = username
+        self.check_action(action)
+
+    def check_action(self, action):
+        if action == 'move':
+            GameLoop(self.dm, self.username).cmdloop()
+        # Need to write combatloop to implement
+        # elif action = 'combat':
+        #     CombatLoop(self.dm, self.username).cmdloop()
+
+
+# Rename to something more relevant
 class GameLoop(cmd.Cmd):
-    intro = ''
     prompt = '-> '
 
-    def __init__(self, size, player, username):
+    def __init__(self, dm, username):
         super().__init__()
-        self.username = username.title()
-        self.dm = DungeonMaster(size, player)
-        self.dm.player.board_size = size
-        self.update_move_options()
-        self.intro = f'Welcome, brave {self.username} to the dungeon!'
+        self.dm = dm
+        self.username = username
 
     def do_hp(self, arg):
         'Check how much health points are left'
         print(f'You have {self.dm.player.endurance} hp left.')
-
-    # debug func
-    def do_check_pos(self, arg):
-        print(self.dm.player.position)
-        print(self.dm.player.board_size)
 
     def do_north(self, arg):
         'Walk north'
@@ -81,10 +81,7 @@ class GameLoop(cmd.Cmd):
 
     def postcmd(self, stop, line):
         self.update_move_options()
+        return cmd.Cmd.postcmd(self, stop, line)
 
-
-# Testing, to be removed
-import entities as e
-player = e.Thief()
-username = 'Persan'
-GameLoop(4, player, username).cmdloop()
+    def postloop(self):
+        Bouncer(self.dm, self.username, 'move')
