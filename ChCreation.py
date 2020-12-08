@@ -3,7 +3,7 @@ import saveLoad as s
 
 
 class CharacterCreation:
-    def __init__(self, username, hero, choice):
+    def __init__(self, username, choice):
         self.username = ''
         self.hero = None
         self.choice = choice
