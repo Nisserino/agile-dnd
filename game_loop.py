@@ -25,6 +25,8 @@ class Bouncer():
         # Need to write combatloop to implement
         # elif action = 'combat':
         #     CombatLoop(self.dm, self.username).cmdloop()
+        elif action == 'end':
+            print('You died, noob')
 
 
 # Rename to something more relevant
@@ -35,6 +37,7 @@ class GameLoop(cmd.Cmd):
         super().__init__()
         self.dm = dm
         self.username = username
+        self.next_loop = 'combat'
 
     def do_hp(self, arg):
         'Check how much health points are left'
@@ -66,10 +69,15 @@ class GameLoop(cmd.Cmd):
 
     def do_give_up(self, arg):
         'Give up, and die in the dungeon'
-        choice = input('Are you sure you give up?\n -> ')
+        choice = input('Are you sure you give up? [Yes/No]\n -> ')
         return self.check_answer(choice)
 
 #   - - - 'Unseen functions' - - -
+    def check_answer(self, choice):
+        if choice[0].lower() == 'y':
+            self.next_loop = 'end'
+            return True
+
     def update_move_options(self):
         self.dm.player.check_options()
 
@@ -84,4 +92,4 @@ class GameLoop(cmd.Cmd):
         return cmd.Cmd.postcmd(self, stop, line)
 
     def postloop(self):
-        Bouncer(self.dm, self.username, 'move')
+        Bouncer(self.dm, self.username, self.next_loop)  # change to 'combat' when made
