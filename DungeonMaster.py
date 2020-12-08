@@ -13,20 +13,16 @@ class DungeonMaster:
         self.room_status = {}
 
     def current_room(self):
-        pass
+        enemies = self.npc_spawner()
+        treasures = Treasure()
 
     def npc_spawner(self):
         npcs = {}
-        count = 0
         for e in self.enemies:
-            if random.randint(1, 100) >= e.chance:
-                count += 1  # Change with self.name when class is updated
-                npc = e()
-                npcs[count] = npc
+            npc = e()
+            if random.randint(1, 100) >= npc.chance:
+                npcs[npc.name] = npc
         return npcs
-
-    def item_spawner(self):
-        pass
 
     def move_player(self):
         pass
