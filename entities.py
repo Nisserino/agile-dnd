@@ -8,7 +8,6 @@ class Movement():
         self.board_size = 4  # Boardsize set to 4 as base value
         self.options = []
 
-
     def check_options(self):
         option = []
         # y
@@ -32,6 +31,7 @@ class Entity(Movement):
     # Contains character funcs such as attacking, aswell as holds the movement
     def __init__(self):
         super().__init__()
+        self.gold = 0
 
     def attack_roll(self):
         # return attack roll

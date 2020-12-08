@@ -8,11 +8,11 @@ class Treasure:
 
     def treasure_randomizer(self):
         treasures = {
-            'Lösa slantar': {40: 2},
-            'Pengapung': {20: 6},
-            'Guldsmycken': {15: 10},
-            'Ädelsten': {10: 14},
-            'Liten skattkista': {5: 20}
+            'Coins': {40: 2},
+            'Coin bag': {20: 6},
+            'Jewlery': {15: 10},
+            'Gems': {10: 14},
+            'Treasure chest': {5: 20}
         }
 
         for i in treasures:
