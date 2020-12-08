@@ -54,7 +54,7 @@ class CharacterCreationLoop(cmd.Cmd):
             return True
 
     def get_username(self):
-        username = input('What are you called?')
+        username = input('What are you called?\n-> ')
         check = self.check_username(username)
         if check:
             return username
