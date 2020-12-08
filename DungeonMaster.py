@@ -12,7 +12,7 @@ class DungeonMaster:
         self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
         self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
 
-    def current_room(self, pos: list):
+    def current_room(self, pos: list) -> tuple:
         if self.room_status[pos] != 'clear':
             return (True, self.print_room_status(pos))
 
@@ -33,10 +33,7 @@ class DungeonMaster:
         treasures = Treasure()
         self.room_status[pos] = (enemies, treasures)
 
-    def combat(self):
-        pass
-
-    def print_room_status(self, pos: list):
+    def print_room_status(self, pos: list) -> str:
         treasures = ', '.join(self.room_status[pos][1])
         enemies = ', '.join(self.room_status[pos][0])
         room = f'Enemies: {enemies}\nTreasurs: {treasures}'
