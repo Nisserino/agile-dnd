@@ -64,6 +64,8 @@ class CharacterCreationLoop(cmd.Cmd):
     def check_username(self, username):
         if username in self.taken_names:
             print('That username is already taken!')
+        else:
+            return username
 
 
 if __name__ == "__main__":
