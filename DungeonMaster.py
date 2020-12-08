@@ -10,7 +10,7 @@ class DungeonMaster:
         self.play_area = GameBoard.create_board(size)
         self.player = player
         self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
-        self.room_status = {}  # {'pos': }
+        self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
 
     def current_room(self, pos, status):
         if status[pos]:
@@ -21,6 +21,8 @@ class DungeonMaster:
             enemies = self.npc_spawner()
             treasures = Treasure()
 
+        return (enemies, treasures)
+
     def npc_spawner(self):
         npcs = []
         for e in self.enemies:
@@ -30,4 +32,7 @@ class DungeonMaster:
         return npcs
 
     def move_player(self):
+        pass
+
+    def combat(self):
         pass
