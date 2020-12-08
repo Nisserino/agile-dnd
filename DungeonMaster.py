@@ -12,16 +12,17 @@ class DungeonMaster:
         self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
         self.room_status = {}
 
-    def current_room(self):
-        enemies = self.npc_spawner()
-        treasures = Treasure()
+    def current_room(self, pos, status):
+        if status[pos]:
+            enemies = self.npc_spawner()
+            treasures = Treasure()
 
     def npc_spawner(self):
-        npcs = {}
+        npcs = []
         for e in self.enemies:
             npc = e()
-            if random.randint(1, 100) >= npc.chance:
-                npcs[npc.name] = npc
+            if random.randint(1, 100) <= npc.chance:
+                npcs.append(npc)
         return npcs
 
     def move_player(self):
