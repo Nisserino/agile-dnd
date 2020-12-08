@@ -1,7 +1,6 @@
 import entities
 from treasure import Treasure
 from gameboard import GameBoard
-from dices import Dices
 import random
 
 
