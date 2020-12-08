@@ -31,8 +31,5 @@ class DungeonMaster:
                 npcs.append(npc)
         return npcs
 
-    def move_player(self):
-        pass
-
     def combat(self):
         pass
