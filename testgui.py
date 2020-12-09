@@ -25,6 +25,12 @@ class GuiTools():
 
     def popUp(self):
         self.choice4_btn = messagebox.askyesno('Quit the game', 'Are you sure?')
+        if self.choice4_btn == 1:
+            # return Menu_loop.do_quit(True)
+            print("quit")
+        else:
+            print('Dont quit')
+            return g.mainMenu()
 
     def registerationWindow(self):
         # creates new window
@@ -59,11 +65,6 @@ class GuiTools():
         self.choice5_btn = tk.Button(self.window, text='Quit the game', command=lambda: g.popUp())
         self.choice5_btn.grid(row=9, column=1, columnspan=2, padx=10, pady=10, ipadx=40)
 
-        if self.choice4_btn == 1:
-            # return Menu_loop.do_quit(True)
-            pass
-        else:
-            return g.mainMenu()
 
         # ch creation button for every each hero
         # message button for quit
