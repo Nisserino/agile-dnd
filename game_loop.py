@@ -1,11 +1,13 @@
 import cmd
 from DungeonMaster import DungeonMaster
+# from combat_loop import CombatLoop
 
 
 class Startup():
     def __init__(self, player, username, size, start):
         self.dm = DungeonMaster(size, player)
         self.dm.player.position = start
+        self.dm.player.board_size = size
         self.username = username  # Might just dunk this var into entities
         self.start_loop()
 
@@ -22,9 +24,8 @@ class Bouncer():
     def check_action(self, action):
         if action == 'move':
             GameLoop(self.dm, self.username).cmdloop()
-        # Need to write combatloop to implement
-        # elif action = 'combat':
-        #     CombatLoop(self.dm, self.username).cmdloop()
+        elif action == 'combat':
+            CombatLoop(self.dm, self.username).cmdloop()
         elif action == 'end':
             print('You died, noob')
 
@@ -38,6 +39,7 @@ class GameLoop(cmd.Cmd):
         self.dm = dm
         self.username = username
         self.next_loop = 'combat'
+        # self.dm.play_area.print_board()
 
     def do_hp(self, arg):
         'Check how much health points are left'
@@ -47,21 +49,25 @@ class GameLoop(cmd.Cmd):
         'Walk north'
         if self.check_move('North'):
             self.dm.player.move(0, -1)
+            return True
 
     def do_south(self, arg):
         'Walk south'
         if self.check_move('South'):
             self.dm.player.move(0, 1)
+            return True
 
     def do_west(self, arg):
         'Walk west'
         if self.check_move('West'):
             self.dm.player.move(1, -1)
+            return True
 
     def do_east(self, arg):
         'Walk East'
         if self.check_move('East'):
             self.dm.player.move(1, 1)
+            return True
 
     def do_directions(self, arg):
         'Check which directions you can walk in'
@@ -87,9 +93,56 @@ class GameLoop(cmd.Cmd):
         else:
             return True
 
-    def postcmd(self, stop, line):
+#   - - - 'CMD functions' - - -
+    def preloop(self):
         self.update_move_options()
-        return cmd.Cmd.postcmd(self, stop, line)
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)  # change to 'combat' when made
+
+
+class CombatLoop(cmd.Cmd):
+    prompt = '-> '
+
+    def __init__(self, dm, username):
+        super().__init__()
+        self.dm = dm
+        self.username = username
+        self.attack_order = []
+        self.next_loop = 'move'
+
+    def do_attack(self, arg):
+        pass
+
+    def do_hp(self, arg):
+        pass
+
+    def do_stats(self, arg):
+        pass
+
+    def do_quit(self, arg):
+        return True
+
+#   - - - Unseen funcs - - -
+    def deal_damage(self, attacker, blocker):
+        pass
+
+    def init_rolls(self):
+        pass
+
+    def enemies_exist(self):
+        # if self.dm.
+        pass
+
+#   - - - Cmd specific funcs - - -
+    def preloop(self):
+        self.dm.entity_spawner(self.dm.player.position)
+
+    def postloop(self):
+        Bouncer(self.dm, self.username, self.next_loop)
+
+
+import entities
+p = entities.Knight()
+u = 'aa'
+Startup(p, u, 4, [0, 0])
