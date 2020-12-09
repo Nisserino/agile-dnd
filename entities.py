@@ -82,10 +82,10 @@ class Thief(Entity):
     def __init__(self):
         super().__init__()
         self.name = 'Thief'
-        self.initiativ = 5
-        self.endurance = 9
-        self.attack = 6
-        self.agility = 4
+        self.initiativ = 7
+        self.endurance = 5
+        self.attack = 5
+        self.agility = 7
 
 
 # Enemy classes
