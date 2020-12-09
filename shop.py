@@ -38,7 +38,7 @@ class Shop:
         self.menu()
         while shopping:
             option = int(input(
-                'Enter a number of the item you wanna purchase: '
+                'Enter a number of the item you want to purchase: '
             ))
             if option >= 5:
                 if option == 5:
