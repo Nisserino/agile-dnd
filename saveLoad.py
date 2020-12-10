@@ -8,7 +8,25 @@ class FileHandler:
             pickle.dump(data, fout)
 
     def load(self):
-        with open('savefile.pickle', 'rb') as fin:
-            data = pickle.load(fin)
+        try:
+            with open('savefile.pickle', 'rb') as fin:
+                data = pickle.load(fin)
+        except Exception:
+            data = {}
 
         return data
+
+
+class DataHandler:
+    def __init__(self):
+        self.character_data = {}
+
+    def update(self, data):
+        self.character_data[data[0]] = data[1]
+
+    def get_names(self) -> list:
+        name_list = []
+        for c in self.character_data:
+            name_list.append(c)
+
+        return name_list
