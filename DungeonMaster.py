@@ -8,7 +8,7 @@ class DungeonMaster:
     def __init__(self, size: int, player: entities.Entity):
         self.game_board = GameBoard()
         self.player = player
-        self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
+        self.enemies = [entities.Giantspider, entities.Skeleton, entities.Orc, entities.Troll]
         self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
 
     def current_room(self, pos: list) -> tuple:
