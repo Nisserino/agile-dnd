@@ -63,6 +63,9 @@ class Entity(Movement):
     def __str__(self):
         return self.name
 
+    def __repr__(self):
+        return self.name
+
 
 # Hero classes
 class Knight(Entity):
