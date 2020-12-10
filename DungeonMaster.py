@@ -22,6 +22,12 @@ class DungeonMaster:
                 'exit': False
             }
 
+    def get_pos(self):
+        pos = 0
+        coords = self.player.position
+        pos += coords[0] * self.player.board_size + coords[1]
+        return f'{pos}'
+
     def current_room(self, pos: list) -> tuple:
         if self.room_status[pos] != 'clear':
             return (True, self.print_room_status(pos))
