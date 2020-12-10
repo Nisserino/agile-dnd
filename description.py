@@ -4,7 +4,7 @@ import random
 class RoomDescription:
     def __init__(self):
         self.enter_room = ['You open up a door', 'You open an old rusty iron door',
-                           'You squeeze through a small crevace in the wall', 'You open an old rotting wooden door',
+                           'You squeeze through a small crevice in the wall', 'You open an old rotting wooden door',
                            'You walk into the room', 'You walk through the entrance', 'You go into the next area',
                            'You push open a huge gate', 'You walk through a gateway', 'You kick open a locked door',
                            'You slowly open up a squeaky gate', 'You walk through a big hole in the wall']
