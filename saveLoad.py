@@ -30,3 +30,6 @@ class DataHandler:
             name_list.append(c)
 
         return name_list
+
+    def load_character(self, name: str):
+        return self.character_data[name]
