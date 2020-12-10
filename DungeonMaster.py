@@ -12,8 +12,9 @@ class DungeonMaster:
             entities.Giantspider, entities.Skeleton,
             entities.Orc, entities.Troll]
         self.room_status = {}
+        self.print_room_status(size)
 
-    def populate_rooms(self, size):
+    def populate_room_status_dict(self, size):
         for num in range(size):
             self.room_status[f'{num}'] = {
                 'clear': False,
