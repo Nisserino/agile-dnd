@@ -32,6 +32,10 @@ class Entity(Movement):
     def __init__(self):
         super().__init__()
         self.gold = 0
+        self.inventory = {
+            'potions': [],
+            'items': []
+        }
 
     def attack_roll(self):
         # return attack roll
