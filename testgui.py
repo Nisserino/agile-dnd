@@ -209,11 +209,17 @@ class GuiTools():
         # ======Dungoen Buttons======
         self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: [self.statusLabel.destroy(), ''])
         self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.statusLabel.destroy(), ''])
-        # ======Hp bar===============(testing)
-        self.heroHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=300, mode='determinate')
+        # ======Hp bar===============(testing)--attack->self.hpHandler()->self.battle===[RIMENDER]
+        self.heroHpLabel = tk.Label(self.windowBattle, text='Your health points').pack(side='left')
+        self.heroHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
         self.heroHP.pack(side='left')
-        self.monsterHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=300, mode='determinate')
+        self.monsterHpLabel = tk.Label(self.windowBattle, text='Enemy health points').pack(side='right')
+        self.monsterHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
         self.monsterHP.pack(side='right')
+        # =====Fill the hp bars
+        self.heroHP['value'] = 100  # hero.endurance
+        self.monsterHP['value'] = 100  # monster.endurance
+
         # ======Dungeon Labels=======
         self.statusLabel = tk.Label(self.windowBattle, text='DungeonMaster.room_info')
         # ======Packing Buttons======
