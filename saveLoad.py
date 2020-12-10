@@ -21,7 +21,7 @@ class DataHandler:
     def __init__(self):
         self.character_data = {}
 
-    def update(self, data):
+    def update(self, data: tuple):
         self.character_data[data[0]] = data[1]
 
     def get_names(self) -> list:
