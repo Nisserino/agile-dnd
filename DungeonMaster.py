@@ -6,34 +6,57 @@ import random
 
 class DungeonMaster:
     def __init__(self, size: int, player: entities.Entity):
-        self.play_area = GameBoard().create_board(size)
+        self.game_board = GameBoard(size)
         self.player = player
-        self.enemies = [entities.Giantspider(), entities.Skeleton(), entities.Orc(), entities.Troll()]
-        self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
+        self.enemies = [
+            entities.Giantspider, entities.Skeleton,
+            entities.Orc, entities.Troll]
+        self.room_status = {}
+        self.print_room_status(size)
 
-    def current_room(self, pos: list) -> tuple:
-        if self.room_status[pos] != 'clear':
-            return (True, self.print_room_status(pos))
+    def populate_room_status_dict(self, size):
+        for num in range(size):
+            self.room_status[f'{num}'] = {
+                'clear': False,
+                'enemies': [],
+                'treasure': [],
+                'exit': False
+            }
 
-        elif self.room_status[pos] == 'clear':
-            return (False, 'Room is empty')
+    def get_pos(self):
+        pos = 0
+        coords = self.player.position
+        pos += coords[0] * self.player.board_size + coords[1]
+        return f'{pos}'
 
+    def enter_room(self) -> bool:
+        if self.room_status[self.get_pos()]['clear']:
+            return False
         else:
-            self.entity_spawner(pos)
-            return (True, self.print_room_status(pos))
+            self.entity_spawner(self.get_pos)
+            self.print_room_status()
+            return True
 
-    def entity_spawner(self, pos: list):
-        enemies = []
-        for e in self.enemies:
-            npc = e()
-            if random.randint(1, 100) <= npc.chance:
-                enemies.append(npc)
+    def entity_spawner(self):
+        pos = self.get_pos()
+        if not self.room_status[pos]['clear'] and \
+           not self.room_status[pos]['enemies']:
+            enemies = []
+            for e in self.enemies:
+                npc = e()
+                if random.randint(1, 100) <= npc.chance:
+                    enemies.append(npc)
 
-        treasures = Treasure()
-        self.room_status[pos] = (enemies, treasures)
+            treasures = Treasure().treasure_randomizer()
+            self.room_status[pos]['enemies'] = enemies
+            self.room_status[pos]['treasure'] = treasures
 
-    def print_room_status(self, pos: list) -> str:
-        treasures = ', '.join(self.room_status[pos][1])
-        enemies = ', '.join(self.room_status[pos][0])
-        room = f'Enemies: {enemies}\nTreasurs: {treasures}'
-        return room
+    def print_room_status(self) -> str:
+        room_status = self.room_status[self.get_pos()]
+        enemies = ', '.join(room_status['enemies'])
+        treasure = ', '.join(room_status['treasure'])
+        room_info = (
+                f'Enemies: {enemies} \n'
+                f'Treasures: {treasure}'
+        )
+        print(room_info)

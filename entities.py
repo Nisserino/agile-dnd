@@ -32,6 +32,10 @@ class Entity(Movement):
     def __init__(self):
         super().__init__()
         self.gold = 0
+        self.inventory = {
+            'potions': [],
+            'items': []
+        }
 
     def attack_roll(self):
         # return attack roll
@@ -93,7 +97,7 @@ class Giantspider(Entity):
     def __init__(self):
         self.name = 'Giant spider'
         self.initiativ = 7
-        self.endurance = 9
+        self.endurance = 1
         self.attack = 2
         self.agility = 3
         self.chance = 20
