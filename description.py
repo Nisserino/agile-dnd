@@ -10,8 +10,8 @@ class RoomDescription:
                            'You slowly open up a squeaky gate', 'You walk through a big hole in the wall']
         self.description = ['the walls and floor are covered in blood',  'A light flickers from a chandelier',
                             'the only light in the room is from a torch lying on the ground',
-                            'the room is overgrown with vegetation', 'Skeletal remains are scattered all over the floor',
-                            'decaying bodies lay scattered around the room', "there's a fountain in here"
+                            'the room is overgrown with vegetation', 'Skeletal remains are scattered all over the floor'
+                            , 'decaying bodies lay scattered around the room', "there's a fountain in here",
                             'moonlight from a crack in the roof lights up the dark loathsome room',
                             'it appears to be a prison cell full of shackles and skeletons',
                             "there's a deep hole in the middle of the room",
@@ -35,7 +35,7 @@ class RoomDescription:
                        'the only sounds you hear is from crackling of fire and dripping water',
                        'the scent of blood and alcohol washes over you', "it's freezing cold", "it's very warm",
                        'its hard to breathe the stuffy air', 'a slight cold breeze grazes you',
-                       "you can hear a muffled scream echoing between the walls", ]
+                       "you can hear a muffled scream echoing between the walls"]
 
     def rnd_desc(self):
         return f'{random.choice(self.enter_room)}, {random.choice(self.description)} and {random.choice(self.senses)}'
