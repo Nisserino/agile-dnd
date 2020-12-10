@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from PIL import ImageTk, Image
 from tkinter import messagebox
 
@@ -94,6 +95,7 @@ class GuiTools():
         self.windowReg.title('Registeration')
         self.windowReg.iconbitmap('icon.ico')
         self.windowReg.geometry('527x625')
+        self.windowReg.configure(background='#89001c')
         # =====label / entry / button for username reg.====#
         self.usernameLabel = tk.Label(self.windowReg, text='Write down a unique name')
         self.usernameLabel.pack()
@@ -169,16 +171,12 @@ class GuiTools():
 
     def gameWindow(self):
         # creates new window
-        # show map on window
-        # directions choices
-        # return battle()
         self.windowDnd = tk.Toplevel(self.master)
         self.windowDnd.title('Dungeon and Dragons')
         self.windowDnd.iconbitmap('icon.ico')
         self.windowDnd.geometry('527x625')
-        
+        # show map on window
         self.bisiler = tk.Label(self.windowDnd, text=a).pack()  # test map
-
         # =====Direction Buttons====
         self.northBtn = tk.Button(self.windowDnd, text='Go to North', command=lambda: 'do_north')
         self.southBtn = tk.Button(self.windowDnd, text='Go to South', command=lambda: 'do_south')
@@ -197,22 +195,32 @@ class GuiTools():
             # return self.shop()
 
     def battle(self):
-        # show dungeon!????
         # show hp bar for both side
         # attack/escape buttons
         # return gamemap()
         self.windowBattle = tk.Toplevel(self.master)
         self.windowBattle.title('You entered in a dungeon!')
         self.windowBattle.iconbitmap('icon.ico')
-        self.windowBattle.geometry('527x625')
-
+        self.windowBattle.geometry('800x625')
+        # ======Dungeon image
+        self.logoDungeon = ImageTk.PhotoImage(Image.open('dungeon.jpg'))
+        self.imgLabelDungeon = tk.Label(self.windowBattle, image=self.logoDungeon)
+        self.imgLabelDungeon.pack()
         # ======Dungoen Buttons======
-        self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: '')
-        self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: '')
-
+        self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: [self.statusLabel.destroy(), ''])
+        self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.statusLabel.destroy(), ''])
+        # ======Hp bar===============(testing)
+        self.heroHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=300, mode='determinate')
+        self.heroHP.pack(side='left')
+        self.monsterHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=300, mode='determinate')
+        self.monsterHP.pack(side='right')
+        # ======Dungeon Labels=======
+        self.statusLabel = tk.Label(self.windowBattle, text='DungeonMaster.room_info')
         # ======Packing Buttons======
         self.attackBtn.pack()
         self.escapeBtn.pack()
+        # ======Packing Labels=======
+        self.statusLabel.pack()
 
         # if player dead:
             # return You are defeated window
