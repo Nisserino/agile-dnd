@@ -23,17 +23,19 @@ class GuiTools():
         self.window.iconbitmap('icon.ico')
         self.window.geometry('800x600')
 
-    def closeWindow(self):
+    def closeWindow(self):  # will make a func for all windows closing statements
         self.windowReg.destroy()
 
     def popUp(self):
         self.choice4_btn = messagebox.askyesno('Quit the game', 'Are you sure?')
         if self.choice4_btn == 1:
             # return Menu_loop.do_quit(True)
+            root.destroy()
             print("quit")
         else:
             print('Dont quit')
-            return g.mainMenu()
+            self.windowMenu.destroy()
+            return self.mainMenu()
 
     def registerationWindow(self):
         # creates new window
@@ -46,14 +48,14 @@ class GuiTools():
         self.usernameLabel.pack()
         self.username_txt = tk.Entry(self.windowReg, width=30)
         self.username_txt.pack(pady=10)
-        self.regButton = tk.Button(self.windowReg, text='Register', command=lambda: [self.mainMenu(), self.closeWindow()])
+        self.regButton = tk.Button(self.windowReg, text='Register', command=lambda: [self.mainMenu(), self.closeWindow(), root.iconify()])
         self.regButton.pack()
         # test shit
         # tk.Label(self.windowReg, text=self.regButton).pack()
 
     def mainMenu(self):
-        self.username = self.username_txt.get()  # connect with chcreation username
-        print(self.username)  # test shit
+        # self.username = self.username_txt.get()  # connect with chcreation username
+        # print(self.username)  # test shit
         # creates new window
         self.windowMenu = tk.Toplevel(self.master)
         self.windowMenu.title('Main Menu')
