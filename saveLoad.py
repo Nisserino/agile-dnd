@@ -2,6 +2,7 @@ import pickle
 
 
 class FileHandler:
+    '''Handles pickling and saving and loading files'''
 
     def save(self, data):
         '''Pickles data and saves it to a file'''
@@ -20,6 +21,8 @@ class FileHandler:
 
 
 class DataHandler:
+    '''Handles character data'''
+
     def __init__(self):
         self.character_data = {}
 
