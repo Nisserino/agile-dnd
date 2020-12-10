@@ -8,8 +8,19 @@ class DungeonMaster:
     def __init__(self, size: int, player: entities.Entity):
         self.game_board = GameBoard(size)
         self.player = player
-        self.enemies = [entities.Giantspider, entities.Skeleton, entities.Orc, entities.Troll]
-        self.room_status = {}  # empty room {'pos': }, not empty room {'pos': (enemies, treasure)}
+        self.enemies = [
+            entities.Giantspider, entities.Skeleton,
+            entities.Orc, entities.Troll]
+        self.room_status = {}
+
+    def populate_rooms(self, size):
+        for num in range(size):
+            self.room_status[f'{num}'] = {
+                'clear': False,
+                'monsters': [],
+                'treasures': [],
+                'exit': False
+            }
 
     def current_room(self, pos: list) -> tuple:
         if self.room_status[pos] != 'clear':
