@@ -31,12 +31,21 @@ class DungeonMaster:
         return f'{pos}'
 
     def enter_room(self) -> bool:
-        if self.room_status[self.get_pos()]['clear']:
+        room_dict = self.room_status[self.get_pos()]
+        if room_dict['clear']:
             return False
+        elif room_dict['exit']:
+            pass
+        elif room_dict['escape']:
+            self.print_room_status
+            return True
         else:
             self.entity_spawner()
             self.print_room_status()
             return True
+
+    def leave_room(self, action):
+        self.room_status[self.get_pos()][action] = True
 
     def entity_spawner(self):
         pos = self.get_pos()
