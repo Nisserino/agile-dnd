@@ -208,6 +208,14 @@ class GuiTools():
         # =====else if shop founds:
             # return self.shop()
 
+    def buyItems(self):  # ============TESTING===================
+        self.varList = [self.variableHp.get(), self.bigPotVar.get(), self.armorVar.get(), self.swordVar.get()]
+        for i in self.varList:
+            if self.varList[i] == 1:
+                print('You bought')
+            else:
+                return self.windowShop
+
     def shop(self):
         # =======Create new window
         self.windowShop = tk.Toplevel(self.master)
@@ -225,13 +233,32 @@ class GuiTools():
         self.bigHpPotLabel = tk.Label(self.windowShop, image=self.bigHpPotPic).pack()
         self.bodyArmorLabel = tk.Label(self.windowShop, image=self.bodyArmorPic).pack()
         self.swordLabel = tk.Label(self.windowShop, image=self.swordPic).pack()
-        # =======Check list======
         # =======Buttons=========
-        self.buyBtn = tk.Button(self.windowShop, text='Buy', command=lambda: '')
+        self.buyBtn = tk.Button(self.windowShop, text='Buy', command=lambda: self.buyItems())
         self.goBackBtn = tk.Button(self.windowShop, text='Go back', command=lambda: '')
         # ======Button placement
         self.buyBtn.pack()
         self.goBackBtn.pack()
+        # ======Check List=====
+        self.hpPotSmall = tk.Checkbutton(self.windowShop, text='Small Hp potion')
+        self.variableHp = tk.IntVar()
+        self.hpPotSmall.config(variable=self.variableHp)
+        self.hpPotSmall.pack()  # Replace=======
+
+        self.hpPotBig = tk.Checkbutton(self.windowShop, text='Big Hp potion')
+        self.bigPotVar = tk.IntVar()
+        self.hpPotBig.config(variable=self.bigPotVar)
+        self.hpPotBig.pack()  # Replace=======
+
+        self.bodyArmor = tk.Checkbutton(self.windowShop, text='Body armor')
+        self.armorVar = tk.IntVar()
+        self.bodyArmor.config(variable=self.armorVar)
+        self.bodyArmor.pack()  # Replace=======
+
+        self.sword = tk.Checkbutton(self.windowShop, text='Sword')
+        self.swordVar = tk.IntVar()
+        self.sword.config(variable=self.swordVar)
+        self.sword.pack()  # Replace=======
 
     def defeat(self):
         # =======Create new window
@@ -244,13 +271,16 @@ class GuiTools():
         # quit/ play again close all windows
 
     def hpHandler(self):
-        # ======Hp bar===============(testing)--attack->self.hpHandler()->self.battle()===[RIMENDER]
+        # ======Hp bar===============(testing)--
         self.heroHpLabel = tk.Label(self.windowBattle, text='Your health points').pack(side='left')
         self.heroHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
         self.heroHP.pack(side='left')
         self.monsterHpLabel = tk.Label(self.windowBattle, text='Enemy health points').pack(side='right')
-        self.monsterHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
-        self.monsterHP.pack(side='right')
+        # =======Multipple Hp bar for monsters=
+        self.monsterHPBars = []
+        for i in range(10):
+            self.monsterHPBars.append(ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate'))
+            self.monsterHPBars[i].pack()  # grid(column=4, row=i+1, sticky='w')
         # =====Fill the hp bars
         self.heroHP['value'] = 100  # hero.endurance*10
         self.monsterHP['value'] = 0  # monster.endurance*10
@@ -267,6 +297,9 @@ class GuiTools():
                 self.windowBattle.destroy()
                 self.windowDnd.destroy()
                 return self.defeat()
+
+    def checkStats(self):  # To check stats in dungeon
+        self.statsLabel = tk.Label(self.windowBattle, text='TESTSSSSSSSdo_statsSSSSSSSSSSSS').pack()
 
     def battle(self):
         self.windowBattle = tk.Toplevel(self.master)
@@ -290,17 +323,15 @@ class GuiTools():
         # ======Dungeon Buttons======
         self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: [self.hpHandler(), self.statusLabel.destroy(), 'do_attack()'])
         self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.shop(), self.statusLabel.destroy(), 'do_escape()'])
-        self.statsBtn = tk.Button(self.windowBattle, text='See Stats!', command=lambda: [self.statusLabel.destroy(), self.statsLabel, 'do_stats()'])
+        self.statsBtn = tk.Button(self.windowBattle, text='See Stats!', command=lambda: [self.descLabel.destroy(), self.statusLabel.destroy(), self.checkStats()])
         # ======Dungeon Labels=======
         self.statusLabel = tk.Label(self.windowBattle, text='DungeonMaster.room')
-        self.statsLabel = tk.Label(self.windowBattle, text='TESTSSSSSSSSSSSSSSSSSSS')
         # ======Packing Buttons======
         self.attackBtn.pack()
         self.escapeBtn.pack()
         self.statsBtn.pack()
         # ======Packing Labels=======
         self.statusLabel.pack()
-        self.statsLabel.pack()
 
         # if player dead:
             # return You are defeated window
