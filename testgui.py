@@ -7,7 +7,16 @@ root = tk.Tk()
 root.title('D&D')
 root.iconbitmap('icon.ico')
 root.configure(background='#89001c')
-root.geometry('527x625')
+w = 527
+h = 650
+# ======Specifiy windows location=======
+ws = root.winfo_screenwidth()
+hs = root.winfo_screenheight()
+
+x = (ws/2) - (w/2)
+y = (hs/2) - (h/2)
+
+root.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
 logo = ImageTk.PhotoImage(Image.open('dnd.jpg'))
 imgLabel = tk.Label(image=logo)
@@ -194,10 +203,35 @@ class GuiTools():
         # =====else if shop founds:
             # return self.shop()
 
+    def hpHandler(self):
+        # ======Hp bar===============(testing)--attack->self.hpHandler()->self.battle()===[RIMENDER]
+        self.heroHpLabel = tk.Label(self.windowBattle, text='Your health points').pack(side='left')
+        self.heroHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
+        self.heroHP.pack(side='left')
+        self.monsterHpLabel = tk.Label(self.windowBattle, text='Enemy health points').pack(side='right')
+        self.monsterHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
+        self.monsterHP.pack(side='right')
+        # =====Fill the hp bars
+        self.heroHP['value'] = 100  # hero.endurance*10
+        self.monsterHP['value'] = 100  # monster.endurance*10
+
+        if self.heroHP['value'] > 0 and self.monsterHP['value'] == 0:
+            messagebox.showinfo('Victory!', 'You won!')
+            self.windowBattle.destroy()
+            self.gameWindow.destroy()
+            return self.gameWindow()
+        elif self.heroHP['value'] > 0:
+            messagebox.showinfo('Lucky!', 'You have escaped!')
+            self.windowBattle.destroy()
+            self.gameWindow.destroy()
+            return self.gameWindow()
+        else:
+            messagebox.showinfo('You are died', 'You are defeated!')
+            self.windowBattle.destroy()
+            self.gameWindow.destroy()
+            return self.defeatWindow()
+
     def battle(self):
-        # show hp bar for both side
-        # attack/escape buttons
-        # return gamemap()
         self.windowBattle = tk.Toplevel(self.master)
         self.windowBattle.title('You entered in a dungeon!')
         self.windowBattle.iconbitmap('icon.ico')
@@ -206,22 +240,11 @@ class GuiTools():
         self.logoDungeon = ImageTk.PhotoImage(Image.open('dungeon.jpg'))
         self.imgLabelDungeon = tk.Label(self.windowBattle, image=self.logoDungeon)
         self.imgLabelDungeon.pack()
-        # ======Dungoen Buttons======
-        self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: [self.statusLabel.destroy(), ''])
-        self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.statusLabel.destroy(), ''])
-        # ======Hp bar===============(testing)--attack->self.hpHandler()->self.battle===[RIMENDER]
-        self.heroHpLabel = tk.Label(self.windowBattle, text='Your health points').pack(side='left')
-        self.heroHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
-        self.heroHP.pack(side='left')
-        self.monsterHpLabel = tk.Label(self.windowBattle, text='Enemy health points').pack(side='right')
-        self.monsterHP = ttk.Progressbar(self.windowBattle, orient='horizontal', length=200, mode='determinate')
-        self.monsterHP.pack(side='right')
-        # =====Fill the hp bars
-        self.heroHP['value'] = 100  # hero.endurance
-        self.monsterHP['value'] = 100  # monster.endurance
-
+        # ======Dungeon Buttons======
+        self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: [self.hpHandler(), self.statusLabel.destroy(), 'do_attack()'])
+        self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.statusLabel.destroy(), 'do_escape()'])
         # ======Dungeon Labels=======
-        self.statusLabel = tk.Label(self.windowBattle, text='DungeonMaster.room_info')
+        self.statusLabel = tk.Label(self.windowBattle, text='DungeonMaster.room')
         # ======Packing Buttons======
         self.attackBtn.pack()
         self.escapeBtn.pack()
