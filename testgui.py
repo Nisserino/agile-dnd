@@ -71,15 +71,14 @@ class GuiTools():
         self.y = (self.hs/2) - (self.height/2)
 
     def areYouSure(self):
-        self.response = messagebox.askokcancel('Start the game', 'Are you ready?')
+        self.response = messagebox.askyesno('Start the game', 'Are you ready?')
 
         if self.response == 1:
             self.windowCh.destroy()
             self.windowMenu.destroy()
             return self.gameWindow()
         else:
-            self.newChCreation()
-            self.windowMenu.destroy()
+            return self.windowCh
 
     def popUp(self):
         self.choice4_btn = messagebox.askyesno('Quit the game', 'Are you sure?')
@@ -126,32 +125,43 @@ class GuiTools():
         self.windowCh = tk.Toplevel(self.master)
         self.windowCh.title('Character creation')
         self.windowCh.iconbitmap('icon.ico')
+        self.windowCh.configure(background='#89001c')
         self.windowCh.geometry('%dx%d+%d+%d' % (w, h, x, y))
-        # =============Buttons For Hero Creation=============#
-
-        self.wizardBtn = tk.Button(self.windowCh, text='Wizard', command=lambda: [self.areYouSure(), 'do_wizard', self.windowCh.destroy()])
-        self.wizardBtn.pack(pady=5, ipadx=70)
-        self.knightBtn = tk.Button(self.windowCh, text='Knight', command=lambda: [self.areYouSure(), 'do_knight', self.windowCh.destroy()])
-        self.knightBtn.pack(pady=5, ipadx=70)
-        self.thiefbtn = tk.Button(self.windowCh, text='Thief', command=lambda: [self.areYouSure(), 'do_thief', self.windowCh.destroy()])
-        self.thiefbtn.pack(pady=5, ipadx=75)
-
+        # ============Image==================
         self.logoCh = ImageTk.PhotoImage(Image.open('heroes1.jpg'))
         self.imgLabelCh = tk.Label(self.windowCh, image=self.logoCh).pack()
+        # =============Hero creation buttons========
+        self.wizardBtn = tk.Button(self.windowCh, text='Wizard', command=lambda: [self.areYouSure(), 'do_wizard'])
+        self.knightBtn = tk.Button(self.windowCh, text='Knight', command=lambda: [self.areYouSure(), 'do_knight'])
+        self.thiefBtn = tk.Button(self.windowCh, text='Thief', command=lambda: [self.areYouSure(), 'do_thief'])
+        # ============Buttons placement============
+        self.wizardBtn.pack(pady=5, ipadx=70)
+        self.knightBtn.pack(pady=5, ipadx=70)
+        self.thiefBtn.pack(pady=5, ipadx=75)
 
     def loadCharacter(self):
+        # =======Create a new window========
         self.windowLoad = tk.Toplevel(self.master)
         self.windowLoad.title('Load screen')
         self.windowLoad.iconbitmap('icon.ico')
+        self.windowLoad.configure(background='#89001c')
         self.windowLoad.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-        pass
+        # =======Show saved files============
+        self.loadBtn = []
+        for i in range(10):
+            self.loadBtn.append(tk.Button(self.windowLoad, text='Load file ' + str(i+1), command=lambda i=i: 'load_character, self.open_this(i)'))
+            self.loadBtn[i].pack()  # grid(column=4, row=i+1, sticky='w')
+        # =======Load and Quit Buttons=======
+        # self.loadBtn = tk.Button(self.windowLoad, text='LOAD', command=lambda: '')
+        self.quitBtn = tk.Button(self.windowLoad, text='Return the main menu', command=lambda: [self.windowMenu, self.windowLoad.destroy()])
+        self.quitBtn.pack()
 
     def mainMenu(self):
         # creates new window
         self.windowMenu = tk.Toplevel(self.master)
         self.windowMenu.title('Main Menu')
         self.windowMenu.iconbitmap('icon.ico')
+        self.windowMenu.configure(background='#89001c')
         self.windowMenu.geometry('%dx%d+%d+%d' % (w, h, x, y))
         # radio buttons / buttons for choices
         # -----------BUTTONS
@@ -178,6 +188,7 @@ class GuiTools():
         self.windowDnd = tk.Toplevel(self.master)
         self.windowDnd.title('Dungeon and Dragons')
         self.windowDnd.iconbitmap('icon.ico')
+        self.windowDnd.configure(background='#89001c')
         self.windowDnd.geometry('%dx%d+%d+%d' % (w, h, x, y))
         # show map on window
         self.bisiler = tk.Label(self.windowDnd, text=a).pack()  # test map
@@ -187,15 +198,50 @@ class GuiTools():
         self.eastBtn = tk.Button(self.windowDnd, text='Go to East', command=lambda: 'do_east')
         self.westBtn = tk.Button(self.windowDnd, text='Go to West', command=lambda: 'do_west')
         # ====Packing Buttons===
-        self.eastBtn.pack(side='bottom', anchor='se')
-        self.westBtn.pack(side='bottom', anchor='se')
-        self.southBtn.pack(side='bottom', anchor='se')
-        self.northBtn.pack(side='bottom', anchor='se')
+        self.eastBtn.pack(pady=10)
+        self.westBtn.pack(pady=10)
+        self.southBtn.pack(pady=10)
+        self.northBtn.pack(pady=10)
 
         # =====If enemy founds:
         return self.battle()
         # =====else if shop founds:
             # return self.shop()
+
+    def shop(self):
+        # =======Create new window
+        self.windowShop = tk.Toplevel(self.master)
+        self.windowShop.title('Shop')
+        self.windowShop.iconbitmap('icon.ico')
+        self.windowShop.configure(background='#89001c')
+        self.windowShop.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        # =======Images==========
+        self.hpPotPic = ImageTk.PhotoImage(Image.open('small_hp_pot.png'))
+        self.bigHpPotPic = ImageTk.PhotoImage(Image.open('big_hp_pot.png'))
+        self.bodyArmorPic = ImageTk.PhotoImage(Image.open('body_armor.png'))
+        self.swordPic = ImageTk.PhotoImage(Image.open('sword.jpg'))
+        # =======Image placement==
+        self.hpPotLabel = tk.Label(self.windowShop, image=self.hpPotPic).pack()
+        self.bigHpPotLabel = tk.Label(self.windowShop, image=self.bigHpPotPic).pack()
+        self.bodyArmorLabel = tk.Label(self.windowShop, image=self.bodyArmorPic).pack()
+        self.swordLabel = tk.Label(self.windowShop, image=self.swordPic).pack()
+        # =======Check list======
+        # =======Buttons=========
+        self.buyBtn = tk.Button(self.windowShop, text='Buy', command=lambda: '')
+        self.goBackBtn = tk.Button(self.windowShop, text='Go back', command=lambda: '')
+        # ======Button placement
+        self.buyBtn.pack()
+        self.goBackBtn.pack()
+
+    def defeat(self):
+        # =======Create new window
+        self.windowDefeat = tk.Toplevel(self.master)
+        self.windowDefeat.title('Dungeon and Dragons')
+        self.windowDefeat.iconbitmap('icon.ico')
+        self.windowDefeat.configure(background='#89001c')
+        self.windowDefeat.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        # put a defeat image
+        # quit/ play again close all windows
 
     def hpHandler(self):
         # ======Hp bar===============(testing)--attack->self.hpHandler()->self.battle()===[RIMENDER]
@@ -220,27 +266,41 @@ class GuiTools():
             if self.answer.lower() == 'ok':
                 self.windowBattle.destroy()
                 self.windowDnd.destroy()
-                return self.defeatWindow()
+                return self.defeat()
 
     def battle(self):
         self.windowBattle = tk.Toplevel(self.master)
         self.windowBattle.title('You entered in a dungeon!')
         self.windowBattle.iconbitmap('icon.ico')
+        self.windowBattle.configure(background='#89001c')
         self.windowBattle.geometry('%dx%d+%d+%d' % (800, 625, x, y))
-        # ======Dungeon image
+        # ======Dungeon image=======
         self.logoDungeon = ImageTk.PhotoImage(Image.open('dungeon.jpg'))
         self.imgLabelDungeon = tk.Label(self.windowBattle, image=self.logoDungeon)
         self.imgLabelDungeon.pack()
+        # ======Dungeon Description==
+        self.randomdesc = '''
+        aslkdjasldkjkasldjaskldjsakdljaskdlasjdladasl
+        lsdklf;lsdfks;ldfk;lasdkas;ldkas;dlaskdl;asdk
+        sd;lfksdl;fksdf;lksdf;lksdf;lskdf;lsdkf;lsdfk
+        sdlkfsdlkfjsdflksdf;sdlfksdf;lkf;sdkfsd;fks;d
+        ;sldkfsd;lfksd;flksdf;lskdf;lsfdks;dflksd;fks
+        '''
+        self.descLabel = tk.Label(self.windowBattle, text=self.randomdesc, bg='black', fg='white').pack()
         # ======Dungeon Buttons======
         self.attackBtn = tk.Button(self.windowBattle, text='ATTACK!', command=lambda: [self.hpHandler(), self.statusLabel.destroy(), 'do_attack()'])
-        self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.statusLabel.destroy(), 'do_escape()'])
+        self.escapeBtn = tk.Button(self.windowBattle, text='ESCAPE!', command=lambda: [self.shop(), self.statusLabel.destroy(), 'do_escape()'])
+        self.statsBtn = tk.Button(self.windowBattle, text='See Stats!', command=lambda: [self.statusLabel.destroy(), self.statsLabel, 'do_stats()'])
         # ======Dungeon Labels=======
         self.statusLabel = tk.Label(self.windowBattle, text='DungeonMaster.room')
+        self.statsLabel = tk.Label(self.windowBattle, text='TESTSSSSSSSSSSSSSSSSSSS')
         # ======Packing Buttons======
         self.attackBtn.pack()
         self.escapeBtn.pack()
+        self.statsBtn.pack()
         # ======Packing Labels=======
         self.statusLabel.pack()
+        self.statsLabel.pack()
 
         # if player dead:
             # return You are defeated window
