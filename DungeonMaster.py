@@ -12,15 +12,16 @@ class DungeonMaster:
             entities.Giantspider, entities.Skeleton,
             entities.Orc, entities.Troll]
         self.room_status = {}
-        self.print_room_status(size)
+        self.populate_room_status_dict(size)
 
     def populate_room_status_dict(self, size):
-        for num in range(size):
+        for num in range(size*size):
             self.room_status[f'{num}'] = {
                 'clear': False,
                 'enemies': [],
                 'treasure': [],
-                'exit': False
+                'exit': False,
+                'escape': False
             }
 
     def get_pos(self):
@@ -33,7 +34,7 @@ class DungeonMaster:
         if self.room_status[self.get_pos()]['clear']:
             return False
         else:
-            self.entity_spawner(self.get_pos)
+            self.entity_spawner()
             self.print_room_status()
             return True
 
@@ -53,8 +54,8 @@ class DungeonMaster:
 
     def print_room_status(self) -> str:
         room_status = self.room_status[self.get_pos()]
-        enemies = ', '.join(room_status['enemies'])
-        treasure = ', '.join(room_status['treasure'])
+        enemies = room_status['enemies']
+        treasure = room_status['treasure']
         room_info = (
                 f'Enemies: {enemies} \n'
                 f'Treasures: {treasure}'
