@@ -25,9 +25,19 @@ class Bouncer():
         if action == 'move':
             GameLoop(self.dm, self.username).cmdloop()
         elif action == 'combat':
-            CombatLoop(self.dm, self.username).cmdloop()
+            if self.spawn_checker():
+                CombatLoop(self.dm, self.username).cmdloop()
+            else:
+                intro = 'No enemies in the room, phew!'
+                GameLoop(self.dm, self.username).cmdloop(intro)
         elif action == 'end':
             print('You died, noob')
+
+    def spawn_checker(self):
+        if self.dm.enter_room():
+            if self.dm.room_status[
+                    self.dm.get_pos()]['enemies']:
+                return True
 
 
 # Rename to something more relevant
@@ -39,11 +49,15 @@ class GameLoop(cmd.Cmd):
         self.dm = dm
         self.username = username
         self.next_loop = 'combat'
-        # self.dm.play_area.print_board()
+        self.dm.game_board.print_board()
 
     def do_hp(self, arg):
         'Check how much health points are left'
         print(f'You have {self.dm.player.endurance} hp left.')
+
+    def do_gold(self, arg):
+        'Check how much gold you have on you'
+        print(f'You have {self.dm.player.gold} gold on your person')
 
     def do_north(self, arg):
         'Walk north'
@@ -98,7 +112,7 @@ class GameLoop(cmd.Cmd):
         self.update_move_options()
 
     def postloop(self):
-        Bouncer(self.dm, self.username, self.next_loop)  # change to 'combat' when made
+        Bouncer(self.dm, self.username, self.next_loop)
 
 
 class CombatLoop(cmd.Cmd):
@@ -111,48 +125,114 @@ class CombatLoop(cmd.Cmd):
         self.attack_order = []
         self.enemies = []
         self.next_loop = 'move'
+        self.turn = 0
+        self.action_list = []
 
     def do_attack(self, arg):
         'Attack, if there are more targets, you get to choose'
-        pass
-
-    def do_hp(self, arg):
-        'Show the HP of everyone'
-        pass
+        self.start_turn(True)
+        if not self.enemies or self.dm.player.endurance <= 0:
+            return True
 
     def do_stats(self, arg):
-        pass
+        if self.attack_order:
+            for entity in self.attack_order:
+                self.get_stats(entity)
 
     def do_escape(self, arg):
         'Attemt to run away from the fight'
         if self.escape():
+            self.dm.room_status[
+                self.dm.get_pos()]['escape'] = True
             return True
+        else:
+            self.start_turn(False)
+            if not self.enemies or self.dm.player.endurance <= 0:
+                return True
 
 #   - - - Unseen funcs - - -
-    def deal_damage(self, attacker, blocker):
-        if attacker.attack_roll() > blocker.evade_roll():
-            blocker.take_hit()
-            print(f'{attacker.name} landed a hit on {blocker.name}')
-        else:
-            print(f'{blocker.name} managed to evade the attack!')
-
-    def init_rolls(self):
-        pass
-
-    def enemies_exist(self):
-        # if self.dm.
-        pass
-
     def escape(self):
         if self.dm.player.escape_roll():
             print('Managed to escape from the enemies')
             return True
         else:
-            print('You slipped trying to run, and didn\'t manage to escape')
+            print('You slipped trying to run.\nYou did not manage to escape.')
+
+    def start_turn(self, attack):
+        if attack:
+            self.action_list.append([self.dm.player, self.enemies[0]])
+        self.load_enemy_action()
+        self.action_loop()
+        self.turn += 1
+
+#   - - - Display funcs - - -
+    def get_stats(self, entity):
+        print(
+            f'{entity.name}\nHp: {entity.endurance}\n'
+            f'Attack: {entity.attack}\nAgility: {entity.agility}\n'
+        )
+
+#   - - - Combat funcs - - -
+    def action_loop(self):
+        for entity in self.attack_order:
+            for fight in self.action_list:
+                if entity is fight[0]:
+                    if fight[0].endurance <= 0:  # fight[0] == attacker obj
+                        next
+                    else:
+                        self.deal_damage(fight[0], fight[1])
+        self.action_list = []
+
+    def load_enemy_action(self):
+        for entity in self.enemies:
+            self.action_list.append([entity, self.dm.player])
+
+    def deal_damage(self, attacker, blocker):
+        if attacker.attack_roll() > blocker.evade_roll():
+            blocker.take_hit()
+            print(f'{attacker.name} landed a hit on {blocker.name}')
+            self.death_check(blocker)
+        else:
+            print(f'{blocker.name} managed to evade the attack!')
+
+    def death_check(self, entity):
+        if entity.endurance <= 0:
+            print(f'{entity.name} died.')
+            if entity in self.enemies:
+                self.attack_order.remove(entity)
+                self.enemies.remove(entity)
+            else:
+                self.next_loop = 'end'
+
+#   - - - Setup funcs - - -
+    def init_rolls(self):
+        self.attack_order.append([
+            self.dm.player, self.dm.player.initiative_roll()])
+        for enemy in self.enemies:
+            self.attack_order.append([enemy, enemy.initiative_roll()])
+        self.attack_order.sort(reverse=True, key=self.idx_one)
+        print(self.attack_order)
+        self.order_cleanup()
+        print(self.attack_order)
+
+    def populate_enemy_list(self):
+        enemies = self.dm.room_status[self.dm.get_pos()]['enemies']
+        for enemy in enemies:
+            self.enemies.append(enemy)
+
+    def idx_one(self, item):
+        return item[1]
+
+    def order_cleanup(self):
+        clean_list = []
+        for item in self.attack_order:
+            clean_list.append(item[0])
+        self.attack_order = clean_list
 
 #   - - - Cmd specific funcs - - -
     def preloop(self):
-        self.dm.entity_spawner(self.dm.player.position)
+        self.populate_enemy_list()
+        self.init_rolls()
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
