@@ -31,19 +31,26 @@ class Entity(Movement):
     # Contains character funcs such as attacking, aswell as holds the movement
     def __init__(self):
         super().__init__()
+        self.dice = Dices()
         self.gold = 0
         self.inventory = {
             'potions': [],
             'items': []
         }
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
     def attack_roll(self):
         # return attack roll
-        return Dices.d6(self.attack)
+        return self.dice.d6(self.attack)
 
     def evade_roll(self):
         # return evasion roll
-        return Dices.d6(self.agility)
+        return self.dice.d6(self.agility)
 
     def take_hit(self):
         # reduce HP by 1
@@ -51,7 +58,7 @@ class Entity(Movement):
 
     def initiative_roll(self):
         # roll for initiative
-        return Dices.d6(self.initiativ)
+        return self.dice.d6(self.initiativ)
 
     def escape_roll(self):
         # Returns bool for escape attemt
@@ -95,6 +102,7 @@ class Thief(Entity):
 # Enemy classes
 class Giantspider(Entity):
     def __init__(self):
+        super().__init__()
         self.name = 'Giant spider'
         self.initiativ = 7
         self.endurance = 1
@@ -105,6 +113,7 @@ class Giantspider(Entity):
 
 class Skeleton(Entity):
     def __init__(self):
+        super().__init__()
         self.name = 'Skeleton'
         self.initiativ = 4
         self.endurance = 2
@@ -115,6 +124,7 @@ class Skeleton(Entity):
 
 class Orc(Entity):
     def __init__(self):
+        super().__init__()
         self.name = 'Orc'
         self.initiativ = 6
         self.endurance = 3
@@ -125,6 +135,7 @@ class Orc(Entity):
 
 class Troll(Entity):
     def __init__(self):
+        super().__init__()
         self.name = 'Troll'
         self.initiativ = 2
         self.endurance = 4
