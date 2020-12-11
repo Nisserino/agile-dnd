@@ -12,12 +12,10 @@ h = 650
 # ======Specifiy windows location=======
 ws = root.winfo_screenwidth()
 hs = root.winfo_screenheight()
-
 x = (ws/2) - (w/2)
 y = (hs/2) - (h/2)
-
 root.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
+# ======Image/Logo/Icon
 logo = ImageTk.PhotoImage(Image.open('dnd.jpg'))
 imgLabel = tk.Label(image=logo)
 imgLabel.pack()
@@ -26,7 +24,6 @@ startButton.pack(pady=30)
 logo1 = ImageTk.PhotoImage(Image.open('heroes.jpg'))
 imgLabel1 = tk.Label(image=logo1)
 imgLabel1.pack()
-
 
 a = '''
                                             /-\                       /-\            ... Room
@@ -62,18 +59,16 @@ a = '''
                                 \-/   \-/   \+/   \-/
 '''
 
-# #===================REMINDER!!!!=Center of screen!!!===============#
-
 
 class GuiTools():
     def __init__(self, master):
         self.master = master
-
-    def new_window(self):  # not in use
-        self.window = tk.Toplevel(self.master)
-        self.window.title('')
-        self.window.iconbitmap('icon.ico')
-        self.window.geometry('527x625')
+        self.width = 527
+        self.height = 650
+        self.ws = self.master.winfo_screenwidth()
+        self.hs = self.master.winfo_screenheight()
+        self.x = (self.ws/2) - (self.width/2)
+        self.y = (self.hs/2) - (self.height/2)
 
     def areYouSure(self):
         self.response = messagebox.askokcancel('Start the game', 'Are you ready?')
@@ -103,7 +98,7 @@ class GuiTools():
         self.windowReg = tk.Toplevel(self.master)
         self.windowReg.title('Registeration')
         self.windowReg.iconbitmap('icon.ico')
-        self.windowReg.geometry('527x625')
+        self.windowReg.geometry('%dx%d+%d+%d' % (w, h, x, y))
         self.windowReg.configure(background='#89001c')
         # =====label / entry / button for username reg.====#
         self.usernameLabel = tk.Label(self.windowReg, text='Write down a unique name')
@@ -131,7 +126,7 @@ class GuiTools():
         self.windowCh = tk.Toplevel(self.master)
         self.windowCh.title('Character creation')
         self.windowCh.iconbitmap('icon.ico')
-        self.windowCh.geometry('527x625')
+        self.windowCh.geometry('%dx%d+%d+%d' % (w, h, x, y))
         # =============Buttons For Hero Creation=============#
 
         self.wizardBtn = tk.Button(self.windowCh, text='Wizard', command=lambda: [self.areYouSure(), 'do_wizard', self.windowCh.destroy()])
@@ -148,7 +143,7 @@ class GuiTools():
         self.windowLoad = tk.Toplevel(self.master)
         self.windowLoad.title('Load screen')
         self.windowLoad.iconbitmap('icon.ico')
-        self.windowLoad.geometry('527x625')
+        self.windowLoad.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
         pass
 
@@ -157,7 +152,7 @@ class GuiTools():
         self.windowMenu = tk.Toplevel(self.master)
         self.windowMenu.title('Main Menu')
         self.windowMenu.iconbitmap('icon.ico')
-        self.windowMenu.geometry('527x625')
+        self.windowMenu.geometry('%dx%d+%d+%d' % (w, h, x, y))
         # radio buttons / buttons for choices
         # -----------BUTTONS
         self.choice1_btn = tk.Button(self.windowMenu, text='Create a new character', command=lambda: self.newChCreation())
@@ -183,7 +178,7 @@ class GuiTools():
         self.windowDnd = tk.Toplevel(self.master)
         self.windowDnd.title('Dungeon and Dragons')
         self.windowDnd.iconbitmap('icon.ico')
-        self.windowDnd.geometry('527x625')
+        self.windowDnd.geometry('%dx%d+%d+%d' % (w, h, x, y))
         # show map on window
         self.bisiler = tk.Label(self.windowDnd, text=a).pack()  # test map
         # =====Direction Buttons====
@@ -191,7 +186,6 @@ class GuiTools():
         self.southBtn = tk.Button(self.windowDnd, text='Go to South', command=lambda: 'do_south')
         self.eastBtn = tk.Button(self.windowDnd, text='Go to East', command=lambda: 'do_east')
         self.westBtn = tk.Button(self.windowDnd, text='Go to West', command=lambda: 'do_west')
-
         # ====Packing Buttons===
         self.eastBtn.pack(side='bottom', anchor='se')
         self.westBtn.pack(side='bottom', anchor='se')
@@ -213,29 +207,26 @@ class GuiTools():
         self.monsterHP.pack(side='right')
         # =====Fill the hp bars
         self.heroHP['value'] = 100  # hero.endurance*10
-        self.monsterHP['value'] = 100  # monster.endurance*10
+        self.monsterHP['value'] = 0  # monster.endurance*10
 
         if self.heroHP['value'] > 0 and self.monsterHP['value'] == 0:
-            messagebox.showinfo('Victory!', 'You won!')
-            self.windowBattle.destroy()
-            self.gameWindow.destroy()
-            return self.gameWindow()
-        elif self.heroHP['value'] > 0:
-            messagebox.showinfo('Lucky!', 'You have escaped!')
-            self.windowBattle.destroy()
-            self.gameWindow.destroy()
-            return self.gameWindow()
+            self.answer = messagebox.showinfo('Victory!', 'You won!')
+            if self.answer.lower() == 'ok':
+                self.windowBattle.destroy()
+                self.windowDnd.destroy()
+                return self.gameWindow()
         else:
-            messagebox.showinfo('You are died', 'You are defeated!')
-            self.windowBattle.destroy()
-            self.gameWindow.destroy()
-            return self.defeatWindow()
+            self.answer = messagebox.showinfo('You are died', 'You are defeated!')
+            if self.answer.lower() == 'ok':
+                self.windowBattle.destroy()
+                self.windowDnd.destroy()
+                return self.defeatWindow()
 
     def battle(self):
         self.windowBattle = tk.Toplevel(self.master)
         self.windowBattle.title('You entered in a dungeon!')
         self.windowBattle.iconbitmap('icon.ico')
-        self.windowBattle.geometry('800x625')
+        self.windowBattle.geometry('%dx%d+%d+%d' % (800, 625, x, y))
         # ======Dungeon image
         self.logoDungeon = ImageTk.PhotoImage(Image.open('dungeon.jpg'))
         self.imgLabelDungeon = tk.Label(self.windowBattle, image=self.logoDungeon)
@@ -260,6 +251,7 @@ class GuiTools():
         #else:
             #You are escaped!
             #return self.gameWindow()
+
 
 
 g = GuiTools(root)
