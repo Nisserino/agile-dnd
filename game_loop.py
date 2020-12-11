@@ -11,6 +11,7 @@ class Startup():
         self.start_loop()
 
     def start_loop(self):
+        self.dm.leave_room('clear')
         Bouncer(self.dm, self.username, 'move')
 
 
@@ -18,6 +19,7 @@ class Bouncer():
     def __init__(self, dm, username, action):
         self.dm = dm
         self.username = username
+        print(self.dm.player.position)
         self.check_action(action)
 
     def check_action(self, action):
@@ -108,6 +110,8 @@ class GameLoop(cmd.Cmd):
 
 #   - - - 'CMD functions' - - -
     def preloop(self):
+        if not self.dm.room_status[self.dm.get_pos()]['escape']:
+            self.dm.leave_room('clear')
         self.update_move_options()
 
     def postloop(self):
@@ -131,6 +135,7 @@ class CombatLoop(cmd.Cmd):
         'Attack, if there are more targets, you get to choose'
         self.start_turn(True)
         if not self.enemies or self.dm.player.endurance <= 0:
+            self.dm.leave_room('clear')
             return True
 
     def do_stats(self, arg):
@@ -141,8 +146,7 @@ class CombatLoop(cmd.Cmd):
     def do_escape(self, arg):
         'Attemt to run away from the fight'
         if self.escape():
-            self.dm.room_status[
-                self.dm.get_pos()]['escape'] = True
+            self.dm.leave_room('escape')
             return True
         else:
             self.start_turn(False)
@@ -235,3 +239,9 @@ class CombatLoop(cmd.Cmd):
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
+
+
+# Debug code
+import entities
+a = entities.Knight()
+Startup(a, 'Pelle', 5, [0, 0])
