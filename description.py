@@ -72,6 +72,4 @@ class RoomDescription:
         return f'{random.choice(self.enter_room)}, '\
                f'{random.choice(self.description)} and ' \
                f'{random.choice(self.senses)}'
-
-room = RoomDescription()
-print(room.rnd_desc())
+    
