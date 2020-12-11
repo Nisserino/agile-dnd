@@ -1,6 +1,5 @@
 import cmd
 from DungeonMaster import DungeonMaster
-# from combat_loop import CombatLoop
 
 
 class Startup():
