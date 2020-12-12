@@ -24,7 +24,8 @@ class DataHandler:
     '''Handles character data'''
 
     def __init__(self):
-        self.character_data = {}
+        self.file_handler = FileHandler()
+        self.character_data = self.FileHandler().load()
 
     def update(self, data: tuple):
         '''Update the character collection with a tuple of username and hero instance'''

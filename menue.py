@@ -1,14 +1,20 @@
 import cmd
 from ChCreation import CharacterCreation as CC
+import saveLoad as SL
 
 
 class Menue_loop(cmd.Cmd):
     intro = 'Welcome to the dungeon run!'
     prompt = '-> '
 
+    def __init__(self):
+        super().__init__()
+        self.data_handler = SL.DataHandler()
+        self.character = []
+
     def do_new_character(self, arg):
         'Create a new character'
-        CharacterCreationLoop().cmdloop()
+        CharacterCreationLoop(self.data_handler).cmdloop()
 
     def do_load_character(self, arg):
         'Load an existing character'
@@ -16,8 +22,17 @@ class Menue_loop(cmd.Cmd):
 
     def do_start_game(self, arg):
         'Start the game'
-        # call func to let player decide on board size
-        pass
+        if self.character:
+            pass
+        else:
+            print('You need to load a character before you can start playing')
+
+    def do_check_load(self, arg):
+        'See what character is loaded'
+        if self.character:
+            print(f'Name: {self.character[0]}\nHero: {self.character.name}')
+        else:
+            print('You have not loaded a character yet.')
 
     def do_quit(self, arg):
         'Exit the game'
@@ -28,15 +43,16 @@ class CharacterCreationLoop(cmd.Cmd):
     intro = 'What would you like to play as?'
     prompt = '-> '
 
-    def __init__(self):
+    def __init__(self, data_handler):
         super().__init__()
-        self.taken_names = ('pelle')  # test name, will get replaced
+        self.data_handler = data_handler
+        self.taken_names = self.data_handler.get_names()
 
     def do_wizard(self, arg):
         'Create a wizard'
         user = self.get_username()
         if user:
-            CC('Wizard', user)
+            self.data_handler.update(CC('Wizard', user))
             return True
 
     def do_knight(self, arg):
@@ -66,6 +82,10 @@ class CharacterCreationLoop(cmd.Cmd):
             print('That username is already taken!')
         else:
             return username
+
+    def postloop(self):
+        self.data_handler.file_handler.save(
+            self.data_handler.character_data)
 
 
 if __name__ == "__main__":
