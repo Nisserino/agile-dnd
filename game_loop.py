@@ -115,9 +115,10 @@ class GameLoop(cmd.Cmd):
 
 #   - - - 'Unseen functions' - - -
     def check_answer(self, choice):
-        if choice[0].lower() == 'y':
-            self.next_loop = 'end'
-            return True
+        if choice:
+            if choice[0].lower() == 'y':
+                self.next_loop = 'end'
+                return True
 
     def update_move_options(self):
         self.dm.player.check_options()
@@ -257,10 +258,3 @@ class CombatLoop(cmd.Cmd):
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
-
-
-import entities
-
-a = entities.Knight()
-
-Startup(a, 'gunnar', 4, [0,0])
