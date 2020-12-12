@@ -5,9 +5,11 @@ from roomdesc import RoomDescription
 
 class Startup():
     def __init__(self, player, username, size, start):
+        player.position = start
+        player.board_size = size
         self.dm = DungeonMaster(size, player)
-        self.dm.player.position = start
-        self.dm.player.board_size = size
+        # self.dm.player.position = start
+        # self.dm.player.board_size = size
         self.username = username  # Might just dunk this var into entities
         self.start_loop()
 
@@ -255,3 +257,10 @@ class CombatLoop(cmd.Cmd):
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
+
+
+import entities
+
+a = entities.Knight()
+
+Startup(a, 'gunnar', 4, [0,0])
