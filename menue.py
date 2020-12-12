@@ -36,7 +36,7 @@ class Menue_loop(cmd.Cmd):
     def do_check_load(self, arg):
         'See what character is loaded'
         if self.character:
-            print(f'Name: {self.character[0]}\nHero: {self.character[1].name}')
+            print(f'Name: {self.character[1]}\nHero: {self.character[0].name}')
         else:
             print('You have not loaded a character yet.')
 
