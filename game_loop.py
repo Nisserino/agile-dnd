@@ -1,5 +1,6 @@
 import cmd
 from DungeonMaster import DungeonMaster
+from roomdesc import RoomDescription
 
 
 class Startup():
@@ -19,9 +20,19 @@ class Bouncer():
     def __init__(self, dm, username, action):
         self.dm = dm
         self.username = username
-        print(self.dm.player.position)
+        self.room_text = RoomDescription().get_description()
         self.place_marker('P')
+        self.check_description()
+        self.save_description()
         self.check_action(action)
+
+    def check_description(self):
+        description = self.dm.room_status[self.dm.get_pos()]['description']
+        if description:
+            self.room_text = description
+
+    def save_description(self):
+        self.dm.room_status[self.dm.get_pos()]['description'] = self.room_text
 
     def place_marker(self, marker):
         self.dm.game_board.add_marker(self.dm.player.position, marker)
@@ -30,13 +41,14 @@ class Bouncer():
         if action == 'move':
             if self.dm.room_status[self.dm.get_pos()]['escape']:
                 self.place_marker('E')
-            GameLoop(self.dm, self.username).cmdloop()
+            GameLoop(self.dm, self.username).cmdloop(self.room_text)
         elif action == 'combat':
             if self.spawn_checker():
-                CombatLoop(self.dm, self.username).cmdloop()
+                CombatLoop(self.dm, self.username).cmdloop(self.room_text)
             else:
-                intro = 'No enemies in the room, phew!'
-                GameLoop(self.dm, self.username).cmdloop(intro)
+                intro = 'No enemies in the room, phew!\n'
+                GameLoop(self.dm, self.username).cmdloop(
+                    f'{intro + self.room_text}')
         elif action == 'end':
             print('You died, noob')
 
@@ -243,3 +255,8 @@ class CombatLoop(cmd.Cmd):
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
+
+
+import entities
+a = entities.Knight()
+Startup(a, 'Pelle', 5, [0, 0])
