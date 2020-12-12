@@ -46,6 +46,16 @@ class DungeonMaster:
 
     def leave_room(self, action):
         self.room_status[self.get_pos()][action] = True
+        self.game_board.add_marker(
+            self.player.position, self.get_marker(action))
+
+    def get_marker(self, action):
+        markers = {
+            'clear': 'C',
+            'escape': 'R',
+            'exit': 'E'
+        }
+        return markers[action]
 
     def entity_spawner(self):
         pos = self.get_pos()
