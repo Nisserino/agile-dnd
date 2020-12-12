@@ -243,9 +243,3 @@ class CombatLoop(cmd.Cmd):
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
-
-
-# Debug code
-import entities
-a = entities.Knight()
-Startup(a, 'Pelle', 5, [0, 0])
