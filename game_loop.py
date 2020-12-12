@@ -20,10 +20,16 @@ class Bouncer():
         self.dm = dm
         self.username = username
         print(self.dm.player.position)
+        self.place_marker('P')
         self.check_action(action)
+
+    def place_marker(self, marker):
+        self.dm.game_board.add_marker(self.dm.player.position, marker)
 
     def check_action(self, action):
         if action == 'move':
+            if self.dm.room_status[self.dm.get_pos()]['escape']:
+                self.place_marker('E')
             GameLoop(self.dm, self.username).cmdloop()
         elif action == 'combat':
             if self.spawn_checker():
@@ -110,9 +116,9 @@ class GameLoop(cmd.Cmd):
 
 #   - - - 'CMD functions' - - -
     def preloop(self):
+        self.update_move_options()
         if not self.dm.room_status[self.dm.get_pos()]['escape']:
             self.dm.leave_room('clear')
-        self.update_move_options()
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
@@ -149,7 +155,7 @@ class CombatLoop(cmd.Cmd):
             self.dm.leave_room('escape')
             return True
         else:
-            self.start_turn(False)
+            self.start_turn(False)  # Means player doesn't get to attack
             if not self.enemies or self.dm.player.endurance <= 0:
                 return True
 
@@ -214,9 +220,7 @@ class CombatLoop(cmd.Cmd):
         for enemy in self.enemies:
             self.attack_order.append([enemy, enemy.initiative_roll()])
         self.attack_order.sort(reverse=True, key=self.idx_one)
-        print(self.attack_order)
         self.order_cleanup()
-        print(self.attack_order)
 
     def populate_enemy_list(self):
         enemies = self.dm.room_status[self.dm.get_pos()]['enemies']
