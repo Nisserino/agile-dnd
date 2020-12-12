@@ -21,7 +21,8 @@ class DungeonMaster:
                 'enemies': [],
                 'treasure': [],
                 'exit': False,
-                'escape': False
+                'escape': False,
+                'description': ''
             }
 
     def get_pos(self):
