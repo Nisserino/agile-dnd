@@ -5,9 +5,11 @@ from roomdesc import RoomDescription
 
 class Startup():
     def __init__(self, player, username, size, start):
+        player.position = start
+        player.board_size = size
         self.dm = DungeonMaster(size, player)
-        self.dm.player.position = start
-        self.dm.player.board_size = size
+        # self.dm.player.position = start
+        # self.dm.player.board_size = size
         self.username = username  # Might just dunk this var into entities
         self.start_loop()
 
@@ -113,9 +115,10 @@ class GameLoop(cmd.Cmd):
 
 #   - - - 'Unseen functions' - - -
     def check_answer(self, choice):
-        if choice[0].lower() == 'y':
-            self.next_loop = 'end'
-            return True
+        if choice:
+            if choice[0].lower() == 'y':
+                self.next_loop = 'end'
+                return True
 
     def update_move_options(self):
         self.dm.player.check_options()
