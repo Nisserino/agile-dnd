@@ -8,9 +8,7 @@ class Startup():
         player.position = start
         player.board_size = size
         self.dm = DungeonMaster(size, player)
-        # self.dm.player.position = start
-        # self.dm.player.board_size = size
-        self.username = username  # Might just dunk this var into entities
+        self.username = username
         self.start_loop()
 
     def start_loop(self):
@@ -43,13 +41,13 @@ class Bouncer():
         if action == 'move':
             if self.dm.room_status[self.dm.get_pos()]['escape']:
                 self.place_marker('E')
-            GameLoop(self.dm, self.username).cmdloop(self.room_text)
+            MoveLoop(self.dm, self.username).cmdloop(self.room_text)
         elif action == 'combat':
             if self.spawn_checker():
                 CombatLoop(self.dm, self.username).cmdloop(self.room_text)
             else:
                 intro = 'No enemies in the room, phew!\n'
-                GameLoop(self.dm, self.username).cmdloop(
+                MoveLoop(self.dm, self.username).cmdloop(
                     f'{intro + self.room_text}')
         elif action == 'end':
             print('You died, noob')
@@ -61,8 +59,7 @@ class Bouncer():
                 return True
 
 
-# Rename to something more relevant
-class GameLoop(cmd.Cmd):
+class MoveLoop(cmd.Cmd):
     prompt = '-> '
 
     def __init__(self, dm, username):
