@@ -63,6 +63,10 @@ class DungeonMaster:
         self.room_status[self.get_pos()][action] = True
         self.game_board.add_marker(
             self.player.position, self.get_marker(action))
+        if action == 'clear' and self.player.endurance >= 1:
+            for treasure in self.room_status[self.get_pos()]['treasure']:
+                self.player.gold += treasure[1]
+            self.room_status[self.get_pos()]['treasure'] = []
 
     def get_marker(self, action):
         markers = {
