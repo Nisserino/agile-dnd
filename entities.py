@@ -88,6 +88,12 @@ class Wizard(Entity):
         self.attack = 9
         self.agility = 5
 
+    def escape_roll(self):
+        escape = False
+        if random.randint(1, 10) <= 8:
+            escape = True
+        return escape
+
 
 class Thief(Entity):
     def __init__(self):
@@ -97,6 +103,12 @@ class Thief(Entity):
         self.endurance = 5
         self.attack = 5
         self.agility = 7
+
+    def double_damage(self):
+        crit = False
+        if random.randint(1, 4) == 1:
+            crit = True
+        return crit
 
 
 # Enemy classes
