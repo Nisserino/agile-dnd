@@ -203,6 +203,10 @@ class CombatLoop(cmd.Cmd):
                 if entity is fight[0]:
                     if fight[0].endurance <= 0:  # fight[0] == attacker obj
                         next
+                    elif fight[1].name == 'Knight' and self.turn == 0:
+                        print(
+                            f'{fight[1]} managed to block the {fight[0]}s hit!'
+                            )
                     else:
                         self.deal_damage(fight[0], fight[1])
         self.action_list = []
@@ -214,7 +218,11 @@ class CombatLoop(cmd.Cmd):
     def deal_damage(self, attacker, blocker):
         if attacker.attack_roll() > blocker.evade_roll():
             blocker.take_hit()
-            print(f'{attacker.name} landed a hit on {blocker.name}')
+            print(f'{attacker.name} landed a hit on the {blocker.name}')
+            if attacker.name == 'Thief':
+                if attacker.double_damage():
+                    print('It was a critical hit!')
+                    blocker.take_hit()
             self.death_check(blocker)
         else:
             print(f'{blocker.name} managed to evade the attack!')
