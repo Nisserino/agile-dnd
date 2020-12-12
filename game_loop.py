@@ -1,6 +1,6 @@
 import cmd
 from DungeonMaster import DungeonMaster
-# from combat_loop import CombatLoop
+from roomdesc import RoomDescription
 
 
 class Startup():
@@ -12,6 +12,7 @@ class Startup():
         self.start_loop()
 
     def start_loop(self):
+        self.dm.leave_room('clear')
         Bouncer(self.dm, self.username, 'move')
 
 
@@ -19,17 +20,35 @@ class Bouncer():
     def __init__(self, dm, username, action):
         self.dm = dm
         self.username = username
+        self.room_text = RoomDescription().get_description()
+        self.place_marker('P')
+        self.check_description()
+        self.save_description()
         self.check_action(action)
+
+    def check_description(self):
+        description = self.dm.room_status[self.dm.get_pos()]['description']
+        if description:
+            self.room_text = description
+
+    def save_description(self):
+        self.dm.room_status[self.dm.get_pos()]['description'] = self.room_text
+
+    def place_marker(self, marker):
+        self.dm.game_board.add_marker(self.dm.player.position, marker)
 
     def check_action(self, action):
         if action == 'move':
-            GameLoop(self.dm, self.username).cmdloop()
+            if self.dm.room_status[self.dm.get_pos()]['escape']:
+                self.place_marker('E')
+            GameLoop(self.dm, self.username).cmdloop(self.room_text)
         elif action == 'combat':
             if self.spawn_checker():
-                CombatLoop(self.dm, self.username).cmdloop()
+                CombatLoop(self.dm, self.username).cmdloop(self.room_text)
             else:
-                intro = 'No enemies in the room, phew!'
-                GameLoop(self.dm, self.username).cmdloop(intro)
+                intro = 'No enemies in the room, phew!\n'
+                GameLoop(self.dm, self.username).cmdloop(
+                    f'{intro + self.room_text}')
         elif action == 'end':
             print('You died, noob')
 
@@ -110,6 +129,8 @@ class GameLoop(cmd.Cmd):
 #   - - - 'CMD functions' - - -
     def preloop(self):
         self.update_move_options()
+        if not self.dm.room_status[self.dm.get_pos()]['escape']:
+            self.dm.leave_room('clear')
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
@@ -132,6 +153,7 @@ class CombatLoop(cmd.Cmd):
         'Attack, if there are more targets, you get to choose'
         self.start_turn(True)
         if not self.enemies or self.dm.player.endurance <= 0:
+            self.dm.leave_room('clear')
             return True
 
     def do_stats(self, arg):
@@ -142,11 +164,10 @@ class CombatLoop(cmd.Cmd):
     def do_escape(self, arg):
         'Attemt to run away from the fight'
         if self.escape():
-            self.dm.room_status[
-                self.dm.get_pos()]['escape'] = True
+            self.dm.leave_room('escape')
             return True
         else:
-            self.start_turn(False)
+            self.start_turn(False)  # Means player doesn't get to attack
             if not self.enemies or self.dm.player.endurance <= 0:
                 return True
 
@@ -211,9 +232,7 @@ class CombatLoop(cmd.Cmd):
         for enemy in self.enemies:
             self.attack_order.append([enemy, enemy.initiative_roll()])
         self.attack_order.sort(reverse=True, key=self.idx_one)
-        print(self.attack_order)
         self.order_cleanup()
-        print(self.attack_order)
 
     def populate_enemy_list(self):
         enemies = self.dm.room_status[self.dm.get_pos()]['enemies']

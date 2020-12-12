@@ -21,7 +21,8 @@ class DungeonMaster:
                 'enemies': [],
                 'treasure': [],
                 'exit': False,
-                'escape': False
+                'escape': False,
+                'description': ''
             }
 
     def get_pos(self):
@@ -31,12 +32,31 @@ class DungeonMaster:
         return f'{pos}'
 
     def enter_room(self) -> bool:
-        if self.room_status[self.get_pos()]['clear']:
+        room_dict = self.room_status[self.get_pos()]
+        if room_dict['clear']:
             return False
+        elif room_dict['exit']:
+            pass
+        elif room_dict['escape']:
+            self.print_room_status
+            return True
         else:
             self.entity_spawner()
             self.print_room_status()
             return True
+
+    def leave_room(self, action):
+        self.room_status[self.get_pos()][action] = True
+        self.game_board.add_marker(
+            self.player.position, self.get_marker(action))
+
+    def get_marker(self, action):
+        markers = {
+            'clear': 'C',
+            'escape': 'R',
+            'exit': 'E'
+        }
+        return markers[action]
 
     def entity_spawner(self):
         pos = self.get_pos()
