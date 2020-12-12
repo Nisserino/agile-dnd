@@ -13,6 +13,7 @@ class DungeonMaster:
             entities.Orc, entities.Troll]
         self.room_status = {}
         self.populate_room_status_dict(size)
+        self.place_exit()
 
     def populate_room_status_dict(self, size):
         for num in range(size*size):
@@ -31,12 +32,25 @@ class DungeonMaster:
         pos += coords[0] * self.player.board_size + coords[1]
         return f'{pos}'
 
+    def place_exit(self):
+        player = self.player.position
+        size = self.player.board_size
+        exit_ref = []
+        for coord in player:
+            if coord == 0:
+                exit_ref.append(size - (1 + random.randint(0, size//2)))
+            else:
+                exit_ref.append(random.randint(0, size//2))
+        pos = 0
+        pos += exit_ref[0] * size + exit_ref[1]
+        self.room_status[f'{pos}']['exit'] = True
+
     def enter_room(self) -> bool:
         room_dict = self.room_status[self.get_pos()]
-        if room_dict['clear']:
+        if room_dict['exit']:
+            print('This is the exit')
+        elif room_dict['clear']:
             return False
-        elif room_dict['exit']:
-            pass
         elif room_dict['escape']:
             self.print_room_status
             return True
