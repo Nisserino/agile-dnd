@@ -11,11 +11,11 @@ class CharacterCreation:
 
     def create_instance(self):
         if self.choice == 'Knight':
-            self.hero = e.Knight()
+            self.hero = e.Knight
         elif self.choice == 'Wizard':
-            self.hero = e.Wizard()
+            self.hero = e.Wizard
         elif self.choice == 'Thief':
-            self.hero = e.Thief()
+            self.hero = e.Thief
 
     def send_to_save(self):
         return self.data
