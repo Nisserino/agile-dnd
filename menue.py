@@ -146,14 +146,14 @@ class CharacterCreationLoop(cmd.Cmd):
         'Create a knight'
         user = self.get_username()
         if user:
-            CC('Knight', user)
+            self.data_handler.update(CC(user, 'Knight').send_to_save())
             return True
 
     def do_theif(self, arg):
         'Create a thief'
         user = self.get_username()
         if user:
-            CC('Knight', user)
+            self.data_handler.update(CC(user, 'Thief').send_to_save())
             return True
 
     def get_username(self):
