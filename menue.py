@@ -2,6 +2,7 @@ import cmd
 from ChCreation import CharacterCreation as CC
 import saveLoad as SL
 import game_loop
+from leaderboard import Leaderboard
 
 
 class Menue_loop(cmd.Cmd):
@@ -49,6 +50,10 @@ class Menue_loop(cmd.Cmd):
             print(
                 'No saved characters yet\nUse command new_character '
                 'to create one!')
+
+    def do_see_leaderboard(self, arg):
+        'See the top 10 scores on the leaderboard'
+        Leaderboard().print_top_x(10)
 
     def do_quit(self, arg):
         'Exit the game'
