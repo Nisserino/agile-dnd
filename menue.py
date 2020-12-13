@@ -21,11 +21,16 @@ class Menue_loop(cmd.Cmd):
     def do_load_character(self, arg):
         'load_character <name>\n' \
             'If no match, saved characternames will be printed'
-        if arg in self.data_handler.get_names():
-            self.character = [
-                self.data_handler.load_character(arg), arg]
+        if arg:
+            if arg in self.data_handler.get_names():
+                self.character = [
+                    self.data_handler.load_character(arg), arg]
+            else:
+                self.do_see_characters('')
         else:
-            self.do_see_characters('')  # empty string to supplement 'arg'
+            print(
+                'You need to write the character name after'
+                ' \'load_character\'')
 
     def do_start_game(self, arg):
         'Start the game'
