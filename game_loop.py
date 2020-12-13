@@ -39,9 +39,12 @@ class Bouncer():
         self.dm.game_board.add_marker(self.dm.player.position, marker)
 
     def check_action(self, action):
+        if self.dm.room_status[self.dm.get_pos()]['exit'] and action != 'end':
+            ContinueLeave(self.dm, self.username).cmdloop()
+            return
         if action == 'move':
             if self.dm.room_status[self.dm.get_pos()]['escape']:
-                self.place_marker('E')
+                self.place_marker('R')  # Might be redundant
             MoveLoop(self.dm, self.username).cmdloop(self.room_text)
         elif action == 'combat':
             if self.spawn_checker():
@@ -58,6 +61,32 @@ class Bouncer():
             if self.dm.room_status[
                     self.dm.get_pos()]['enemies']:
                 return True
+
+
+class ContinueLeave(cmd.Cmd):
+    intro = 'You found the exit!\nWould you like to leave or continue the run?'
+    prompt = '-> '
+
+    def __init__(self, dm, username):
+        super().__init__()
+        self.dm = dm
+        self.username = username
+        self.leave = False
+
+    def do_continue(self, arg):
+        'Continue the run'
+        return True
+
+    def do_leave(self, arg):
+        'Exit the dungeon with your gold'
+        self.leave = True
+        return True
+
+    def postloop(self):
+        if self.leave:
+            Bouncer(self.dm, self.username, 'end')
+        else:
+            Bouncer(self.dm, self.username, 'move')
 
 
 class MoveLoop(cmd.Cmd):

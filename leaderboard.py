@@ -10,11 +10,11 @@ class Leaderboard:
             with open('score.csv', 'r'):
                 pass
         except FileNotFoundError:
-            with open('score.csv', 'w') as f:
+            with open('score.csv', 'w', newline=None) as f:
                 csv.writer(f).writerow(('Username', 'Score'))
 
     def add_score(self, username, gold):
-        with open('score.csv', 'a') as f:
+        with open('score.csv', 'a', newline=None) as f:
             csv.writer(f).writerow((username, gold))
         self.show_rank((username, gold))
 
@@ -37,14 +37,16 @@ class Leaderboard:
 
     def print_top_x(self, x):
         scores = self.get_scores()
-        if len(scores) > x:
+        if x > len(scores):
             x = len(scores)
         elif len(scores) == 0:
             print('There are no highscores yet')
-        else:
-            for i in range(x):
-                row = ', '.join(scores[i])
-                print(f'{i + 1} {row}')
+            return
+
+        for i in range(x):
+            score = [scores[i][0], str(scores[i][1])]
+            row = ', '.join(score)
+            print(f'{i + 1} {row}')
 
     def idx_one(self, item):
         return item[1]
