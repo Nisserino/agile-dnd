@@ -10,11 +10,11 @@ class Leaderboard:
             with open('score.csv', 'r'):
                 pass
         except FileNotFoundError:
-            with open('score.csv', 'w') as f:
+            with open('score.csv', 'w', newline=None) as f:
                 csv.writer(f).writerow(('Username', 'Score'))
 
     def add_score(self, username, gold):
-        with open('score.csv', 'a') as f:
+        with open('score.csv', 'a', newline=None) as f:
             csv.writer(f).writerow((username, gold))
         self.show_rank((username, gold))
 
