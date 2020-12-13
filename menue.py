@@ -60,10 +60,11 @@ class Menue_loop(cmd.Cmd):
         return True  # Exits the loop
 
     def postloop(self):
-        self.data_handler.update(tuple(self.character))
-        self.data_handler.file_handler.save(
-            self.data_handler.character_data
-        )
+        if self.character:
+            self.data_handler.update(tuple(self.character))
+            self.data_handler.file_handler.save(
+                self.data_handler.character_data
+            )
 
 
 class PickBoardSize(cmd.Cmd):
