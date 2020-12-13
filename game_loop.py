@@ -1,6 +1,7 @@
 import cmd
 from DungeonMaster import DungeonMaster
 from roomdesc import RoomDescription
+from end import End
 
 
 class Startup():
@@ -50,7 +51,7 @@ class Bouncer():
                 MoveLoop(self.dm, self.username).cmdloop(
                     f'{intro + self.room_text}')
         elif action == 'end':
-            print('You died, noob')
+            End(self.dm.player, self.username)
 
     def spawn_checker(self):
         if self.dm.enter_room():
@@ -115,6 +116,7 @@ class MoveLoop(cmd.Cmd):
         if choice:
             if choice[0].lower() == 'y':
                 self.next_loop = 'end'
+                self.dm.player.endurance = 0
                 return True
 
     def update_move_options(self):
