@@ -18,14 +18,14 @@ class Startup():
 
 
 class Bouncer():
-    def __init__(self, dm, username, action):
+    def __init__(self, dm, username, action, leave=True):
         self.dm = dm
         self.username = username
         self.room_text = RoomDescription().get_description()
         self.place_marker('P')
         self.check_description()
         self.save_description()
-        self.check_action(action)
+        self.check_exit(action, leave)
 
     def check_description(self):
         description = self.dm.room_status[self.dm.get_pos()]['description']
@@ -38,10 +38,17 @@ class Bouncer():
     def place_marker(self, marker):
         self.dm.game_board.add_marker(self.dm.player.position, marker)
 
+    def check_exit(self, action, leave):
+        if leave:
+            if self.dm.room_status[self.dm.get_pos()]['exit'] and \
+                    action != 'end':
+                ContinueLeave(self.dm, self.username).cmdloop()
+            else:
+                self.check_action(action)
+        else:
+            self.check_action(action)
+
     def check_action(self, action):
-        if self.dm.room_status[self.dm.get_pos()]['exit'] and action != 'end':
-            ContinueLeave(self.dm, self.username).cmdloop()
-            return
         if action == 'move':
             if self.dm.room_status[self.dm.get_pos()]['escape']:
                 self.place_marker('R')  # Might be redundant
@@ -86,7 +93,7 @@ class ContinueLeave(cmd.Cmd):
         if self.leave:
             Bouncer(self.dm, self.username, 'end')
         else:
-            Bouncer(self.dm, self.username, 'move')
+            Bouncer(self.dm, self.username, 'move', False)
 
 
 class MoveLoop(cmd.Cmd):
@@ -162,6 +169,8 @@ class MoveLoop(cmd.Cmd):
         self.update_move_options()
         if not self.dm.room_status[self.dm.get_pos()]['escape']:
             self.dm.leave_room('clear')
+        if self.dm.room_status[self.dm.get_pos()]['exit']:
+            self.dm.leave_room('exit')
 
     def postloop(self):
         Bouncer(self.dm, self.username, self.next_loop)
