@@ -12,7 +12,7 @@ _Dungeon Run is a game where your goal is to have fun, and loot as many treasure
 ## **_Guide - How to play_**
 #
 __If you are ever unsure of what you can do while in the game just type '*? or help*'.__ 
-- [Create a character🧙](#Making-your-character)
+- [Create a character](#Making-your-character)
 - [Load your character](#Load-your-character)
 - [Start the game](#Start-the-game)
 - [Find treasures💰](#Treasures)
