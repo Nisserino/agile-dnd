@@ -12,7 +12,7 @@ _Dungeon Run is a game where your goal is to have fun, and loot as many treasure
 ## **_Guide - How to play_**
 #
 __If you are ever unsure of what you can do while in the game just type '*? or help*'.__ 
-- [Create a character](#Making-your-character)
+- [Create a character🧙](#Making-your-character)
 - [Load your character](#Load-your-character)
 - [Start the game](#Start-the-game)
 - [Find treasures💰](#Treasures)
@@ -21,7 +21,7 @@ __If you are ever unsure of what you can do while in the game just type '*? or h
 - [Winning conditions🏆](#Winning-conditions)
 
 <br><br>
-## **_Making your character🧙_**
+## **_Create your character_**
 #
 _When you start the game for the first time you need to create a new character. <br> Typing **new_character** will give you the option to choose which character you want to play as. After that you get to decide your name._
 
