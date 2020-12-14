@@ -9,6 +9,7 @@ __<h1>Overview</h1>__
 _Dungeon Run is a game where your goal is to have fun, and loot as many treasures as possible. Inside the treasures you can find gold. The gold you loot is what defines your highscore. <br> Be careful, there are enemies waiting for you along the way.<br> You can fight the enemies and kill them, or sometimes run away from them. <br> Once you have found all the treasures in a  room, you get moved to another room._
 
 **Mechanics:**<br>
+The game is object-oriented.<br>
 _During the game experience there are 'hidden dices' that are being thrown in the background. This is what makes the experience of playing the game variate every time you play it. When you spawn, the exit door is randomly placed somewhere not too close to you. Spawning enemies, treasures are also random._
 
 <br><br>
@@ -29,6 +30,8 @@ __If you are ever unsure of what you can do while in the game just type '*? or h
 - [Combat⚔️](#Combat)
 - [Slay enemies🧟‍♀️](#Enemies)
 - [Winning conditions🏆](#Winning-conditions)
+- [Game board🗺️](#Game-board)
+- [Movement](#Movement)
 
 <br><br>
 ## **_Making your character🧙_**
@@ -40,10 +43,10 @@ _When you start the game for the first time you need to create a new character. 
 
 | Knight    | Theif | Wizard|
 |:------------- |:----------------|:-------------|
-| Initiativ: 5    | Initiativ: 7 | Initiativ: 6 |
-| Endurance: 9    | Endurance: 5 | Endurance: 4 |
-| Attack: 6       | Attack: 5    | Attack: 9    |
-| Agility: 4      | Agility: 7   | Agility: 5   |
+| Initiative: 5 | Initiative: 7   | Initiative: 6|
+| Endurance: 9  | Endurance: 5    | Endurance: 4 |
+| Attack: 6     | Attack: 5       | Attack: 9    |
+| Agility: 4    | Agility: 7      | Agility: 5   |
 
 <br><br>
 ## **_Load your character_**
@@ -64,7 +67,14 @@ To start playing a game you first need to do these steps:
 ## **_Treasures_** 
 #
 There are 5 different types of treasures you can run into.
-<br> They all have different spawn-chances. The lower procentage of them spawning, the bigger the loot.
+<br> They all have different spawn-chances. The lower procentage of them spawning, the bigger the loot.<br><br>
+**_list of the treasures:_**
+| Coins       | Coin bag        | Jewelry      | Gems            |Treasure Chest|        
+|:-------------  |:----------------|:-------------|:-------------|:-------------|
+| Chance: 40%    | Chance: 20%     | Chance: 6    | Chance: 15%  | Chance: 5%   |
+| Gold: 2        | Gold: 6         | Gold: 3      | Gold: 10     | Gold: 20     |
+
+
 
 <br><br>
 ## **_Combat_**
@@ -82,12 +92,20 @@ Your attacking and escaping success depend on your stats and luck when rolling t
 _**There are 4 different enemies that you can run into. Those are:**_
 | Giantspider    |  Skeleton |        Orc |         Troll |
 |:-------------  |:----------------|:-------------|:-------------|
-| Initiativ: 7   | Initiativ: 4    | Initiativ: 6 | Initiativ: 2 |
+| Initiative: 7  | Initiative: 4   | Initiative: 6| Initiative: 2|
 | Endurance: 9   | Endurance: 2    | Endurance: 3 | Endurance: 4 |
 | Attack: 2      | Attack: 3       | Attack: 4    | Attack: 7    |
 | Agility: 3     | Agility: 3      | Agility: 4   | Agility: 2   |
 | Chance: 20%    | Chance: 15%     | Chance: 10   | Chance: 5%   |
 
+
+<br> </br>
+_***Special abilities:***<br>_
+Each class have their own special ability
+<br>
+Knight: Shield block, always blocks the first attack in a battle.<br>
+Wizard: Blinding light, makes monsters blind which increases your ability to escape by 80%<br>
+Thief: Critical hit, has a 25% chance of doing double damage every attack_
 <br><br>
 ## **_Winning conditions_**
 #
@@ -101,3 +119,24 @@ When your character dies or you give up(type give_up) it will save your name and
 the amount of gold you have into the leaderboard. The leaderboard is ordered
 by which character had the most gold when dying._
 
+<br><br>
+## **_Game board_**
+#
+**The different markers on the map are as follows:**
+<br>
+-   X = Unknown room
+-   P = Your position
+-   C = Cleared room
+-   E = Room with an exit
+-   R = You have escaped from this room
+
+<h1><h1>
+
+<br><br>
+## **_Movement_**
+#
+**To walk around the dungeon you decide which way to go by typing:**
+-   North
+-   South
+-   East
+-   West
