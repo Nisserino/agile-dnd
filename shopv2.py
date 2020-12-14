@@ -1,38 +1,42 @@
-import entities
 
 
 class Shop:
 
-    def __init__(self, player):
+    def __init__(self, player, username):
+        self.username = username
+        self.player = player
         self.shop_items = {
-            'Small potion': 10,
-            'Luck potion': 30,
-            'Armor': 40,
-            'Sword': 40
+            'Small potion': [50, 2],
+            'Luck potion': [50, 1],
+            'Armor': [100, 1],
+            'Sword': [100, 1]
         }
-        self.small_potion = 2
-        self.luck_potion = ['Luck potion', 1]
-        self.armor = ['Armor', 1]
-        self.sword = ['Sword', 1]
 
-    def check_money(self, amount, item):
-        if amount >= self.shop_items[item]:
-            return True
-
-    def checkout(self, amount, item):
+    def checkout(self, amount, item, player_key):
+        if self.check_item(item, player_key):
+            return
         if self.check_money(amount, item):
-            do = True
-            while do:
-                sure = input(f'Do you want to buy {item}? yes/no: ').lower()
-                if sure == 'yes':
-                    print(item + ' has been added to your inventory!')
-                    return True
-                    do = False
-                elif sure == 'no':
-                    print(item + ' has been removed, choose another item.')
-                    return False
-                    do = False
-                else:
-                    print('Only yes or no.')
+            choice = input('Do you want to purchase this item? [Yes/No]\n ->')
+            if self.check_choice(choice):
+                print(f'{item} has been added to your inventory')
+                return True
+            else:
+                print(f'{self.username} puts {item} back on the shelf')
         else:
             print('You dont have money, go do a run!')
+
+    def check_money(self, amount, item):
+        if amount >= self.shop_items[item][0]:
+            return True
+
+    def check_choice(self, choice):
+        if choice[0].lower() == 'y':
+            return True
+
+    def check_item(self, item, player_key):
+        if self.get_item(item) in self.player.inventory[player_key]:
+            print('You can only buy this item once!')
+            return True
+
+    def get_item(self, item):
+        return [item, self.shop_items[item][1]]
