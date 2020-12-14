@@ -22,10 +22,11 @@ class Leaderboard:
         scores = []
         with open('score.csv', 'r') as f:
             for line in csv.reader(f):
-                if line[1] == 'Score':
-                    next
-                else:
-                    scores.append((line[0], int(line[1])))
+                if line:
+                    if line[1] == 'Score':
+                        next
+                    else:
+                        scores.append((line[0], int(line[1])))
         scores.sort(reverse=True, key=self.idx_one)
         return scores
 
