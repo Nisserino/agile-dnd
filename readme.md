@@ -153,8 +153,8 @@ by which character had the most gold when dying._
 
 ## **_Shop_**
 #
-At the end of each floor is a shop. At the shop you can buy potions and make your weapon stronger. Weapon buff gets removed once you die.<br><br>
-You pay with your gold.
+**At the end of each floor is a shop. At the shop you can buy potions and make your weapon stronger. Weapon buff gets removed once you die.<br><br>
+You pay with your gold.**
 
 
 
