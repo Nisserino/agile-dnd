@@ -30,11 +30,12 @@ class DataHandler:
     def update(self, data: tuple):
         '''Update the character collection with a
         tuple of username and hero instance'''
-        self.character_data[data[0]] = data[1]
+        self.character_data[data[1]] = data[0]
 
     def get_names(self) -> list:
         '''Returns a list of all the used usernames'''
         name_list = []
+        print(self.character_data)
         for c in self.character_data:
             name_list.append(c)
 

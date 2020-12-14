@@ -18,7 +18,8 @@ class End:
             'You have been slain in the dungeon\n'
             'Your score is being saved to the leaderboard.'
             )
-        Leaderboard().add_score(self.username, self.player.gold)
+        Leaderboard().add_score(
+            f'{self.username} the {self.player.name}', self.player.gold)
         Leaderboard().get_scores()
         print(
             'Your hp, gold and items are going to be reset.\n'
