@@ -63,3 +63,10 @@ by which character had the most gold when dying.
   
 ## Misc
 **Hero stats**
+
+| Knight    | Thief | Wizard|
+|:------------- |:----------------|:-------------|
+| Initiative: 5   | Initiative: 7| Initiative: 6|
+| Endurance: 9    | Endurance: 5 | Endurance: 4 |
+| Attack: 6       | Attack: 5    | Attack: 9    |
+| Agility: 4      | Agility: 7   | Agility: 5   |
