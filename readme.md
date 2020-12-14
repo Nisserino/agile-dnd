@@ -10,7 +10,7 @@ _Dungeon Run is a game where your goal is to have fun, and loot as many treasure
 
 **Mechanics:**<br>
 The game is object-oriented.<br>
-_During the game experience there are 'hidden dices' that are being thrown in the background. This is what makes the experience of playing the game variate every time you play it. When you spawn, the exit door is randomly placed somewhere not too close to you. Spawning enemies, treasures are also random._ <br>
+_During the game experience there are 'hidden dices' that are being thrown in the background. This is what makes the experience of playing the game variate every time you play it. When you spawn, the exit door is randomly placed somewhere not too close to you. Spawning enemies, treasures are also random._ <br><br>
 _When you are done playing the game, your character will still be saved. When you decide to play another time, your character will still be there. <br> 
 Waiting for you to make a new highscore. Unless you want to create a new character and play another class._
 
