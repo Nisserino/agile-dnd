@@ -139,8 +139,4 @@ cython_debug/
 
 # Custom
 .vscode/
-.flake8
-dice.py
-FileHandler.py
-interface.py
-shopping.py
+.gitignore
