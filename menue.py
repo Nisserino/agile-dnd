@@ -188,3 +188,4 @@ class CharacterCreationLoop(cmd.Cmd):
 
 if __name__ == "__main__":
     Menue_loop().cmdloop()
+    
