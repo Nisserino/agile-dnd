@@ -28,7 +28,7 @@ __If you are ever unsure of what you can do while in the game just type '*? or h
 - [Start the game](#Start-the-game)
 - [Find treasures💰](#Treasures)
 - [Combat⚔️](#Combat)
-- [Slay enemies🧟‍♀️](#Enemies)
+- [Enemies🧟‍♀️](#Enemies)
 - [Winning conditions🏆](#Winning-conditions)
 - [Game board🗺️](#Game-board)
 - [Movement](#Movement)
