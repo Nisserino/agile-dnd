@@ -35,7 +35,6 @@ class DataHandler:
     def get_names(self) -> list:
         '''Returns a list of all the used usernames'''
         name_list = []
-        print(self.character_data)
         for c in self.character_data:
             name_list.append(c)
 
