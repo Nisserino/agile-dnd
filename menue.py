@@ -5,9 +5,20 @@ import game_loop
 from leaderboard import Leaderboard
 from shoploop import ShopLoop
 
+intro_msg = r" ____                                       ____              "\
+    "\n" + r"|  _ \ _   _ _ __   __ _  ___  ___  _ __   |  _ \ _   _ _ __  "\
+    "\n" + r"| | | | | | | '_ \ / _` |/ _ \/ _ \| '_ \  | |_) | | | | '_ \ "\
+    "\n" + r"| |_| | |_| | | | | (_| |  __/ (_) | | | | |  _ <| |_| | | | |"\
+    "\n" + r"|____/ \__,_|_| |_|\__, |\___|\___/|_| |_| |_| \_\\__,_|_| |_|"\
+    "\n" + r"                   |___/   "\
+    "\n"\
+    "\n" + "You can type help or ? at any time to see what commands you can use"\
+    "\n"\
+    "Main Menu"
+
 
 class Menue_loop(cmd.Cmd):
-    intro = 'Welcome to the dungeon run!'
+    intro = intro_msg
     prompt = '-> '
 
     def __init__(self):
@@ -81,7 +92,8 @@ class Menue_loop(cmd.Cmd):
 
 
 class PickBoardSize(cmd.Cmd):
-    intro = 'Pick a boardsize'
+    intro = '\n\nPick a boardsize.'\
+        '\nType help or ? to see the alternatives.'
     prompt = '-> '
 
     def __init__(self, player, username):
@@ -110,7 +122,8 @@ class PickBoardSize(cmd.Cmd):
 
 
 class PickStart(cmd.Cmd):
-    intro = 'Pick your starting corner of the map'
+    intro = '\n\nPick your starting corner of the map'\
+        '\nType help or ? to see the alternatives.'
     prompt = '-> '
 
     def __init__(self, player, username, board_size):
@@ -146,7 +159,8 @@ class PickStart(cmd.Cmd):
 
 
 class CharacterCreationLoop(cmd.Cmd):
-    intro = 'What would you like to play as?'
+    intro = '\n\nWhat would you like to play as?'\
+        '\nType help or ? to see the alternatives'
     prompt = '-> '
 
     def __init__(self, data_handler):
@@ -176,7 +190,7 @@ class CharacterCreationLoop(cmd.Cmd):
             return True
 
     def get_username(self):
-        username = input('What are you called?\n-> ')
+        username = input('\nWhat are you called?\n-> ')
         check = self.check_username(username)
         if check:
             return username
@@ -196,4 +210,3 @@ class CharacterCreationLoop(cmd.Cmd):
 
 if __name__ == "__main__":
     Menue_loop().cmdloop()
-    

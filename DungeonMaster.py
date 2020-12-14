@@ -52,7 +52,7 @@ class DungeonMaster:
         elif room_dict['clear']:
             return False
         elif room_dict['escape']:
-            self.print_room_status
+            self.print_room_status()
             return True
         else:
             self.entity_spawner()
@@ -110,7 +110,7 @@ class DungeonMaster:
             for treasures in treasure:
                 found_treasure += treasures[0] + ' ' + str(treasures[1]) + '\n'
         room_info = (
-                f'Enemies:\n{found_enemies} \n'
-                f'Treasures:\n{found_treasure}'
+            f'Enemies:\n{found_enemies} \n'
+            f'Treasures:\n{found_treasure}'
         )
         print(room_info)

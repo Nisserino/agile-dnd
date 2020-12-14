@@ -4,6 +4,12 @@ from roomdesc import RoomDescription
 from end import End
 
 
+move_intro = "Where do you want to go?"\
+    '\nType help or ? to see the alternatives.'
+combat_intro = "\n\nCombat beginns\n"
+continue_intro = "\n\nYou found the exit!\nWould you like to leave or continue the run?\n"
+
+
 class Startup():
     def __init__(self, player, username, size, start):
         player.position = start
@@ -57,7 +63,7 @@ class Bouncer():
             if self.spawn_checker():
                 CombatLoop(self.dm, self.username).cmdloop(self.room_text)
             else:
-                intro = 'No enemies in the room, phew!\n'
+                intro = '\n\nNo enemies in the room, phew!\n'
                 MoveLoop(self.dm, self.username).cmdloop(
                     f'{intro + self.room_text}')
         elif action == 'end':
@@ -71,7 +77,7 @@ class Bouncer():
 
 
 class ContinueLeave(cmd.Cmd):
-    intro = 'You found the exit!\nWould you like to leave or continue the run?'
+    intro = continue_intro
     prompt = '-> '
 
     def __init__(self, dm, username):
@@ -97,6 +103,7 @@ class ContinueLeave(cmd.Cmd):
 
 
 class MoveLoop(cmd.Cmd):
+    intro = move_intro
     prompt = '-> '
 
     def __init__(self, dm, username):
@@ -177,6 +184,7 @@ class MoveLoop(cmd.Cmd):
 
 
 class CombatLoop(cmd.Cmd):
+    intro = combat_intro
     prompt = '-> '
 
     def __init__(self, dm, username):
@@ -243,7 +251,7 @@ class CombatLoop(cmd.Cmd):
                     elif fight[1].name == 'Knight' and self.turn == 0:
                         print(
                             f'{fight[1]} managed to block the {fight[0]}s hit!'
-                            )
+                        )
                     else:
                         self.deal_damage(fight[0], fight[1])
         self.action_list = []
