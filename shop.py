@@ -6,8 +6,8 @@ class Shop:
         self.username = username
         self.player = player
         self.shop_items = {
-            'Small potion': [50, 2],
-            'Luck potion': [50, 1],
+            'Small potion': [75, 2],
+            'Smaller potion': [50, 1],
             'Armor': [100, 1],
             'Sword': [100, 1]
         }
@@ -16,7 +16,7 @@ class Shop:
         if self.check_item(item, player_key):
             return
         if self.check_money(amount, item):
-            choice = input('Do you want to purchase this item? [Yes/No]\n ->')
+            choice = input('Do you want to purchase this item? [Yes/No]\n -> ')
             if self.check_choice(choice):
                 print(f'{item} has been added to your inventory')
                 return True
@@ -34,7 +34,9 @@ class Shop:
             return True
 
     def check_item(self, item, player_key):
-        if self.get_item(item) in self.player.inventory[player_key]:
+        item = self.get_item(item)
+        user_inv = self.player.inventory[player_key]
+        if item in user_inv or [item[0], 0] in user_inv:
             print('You can only buy this item once!')
             return True
 

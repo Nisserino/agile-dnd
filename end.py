@@ -36,5 +36,7 @@ class End:
             'or just go for another run straight away.\n'
             'You could also quit the game, but let\'s not mention that')
 
+        self.player.inventory['potions'] = []
+
     def reset_player(self):
         self.player.__init__()
