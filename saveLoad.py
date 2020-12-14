@@ -24,10 +24,12 @@ class DataHandler:
     '''Handles character data'''
 
     def __init__(self):
-        self.character_data = {}
+        self.file_handler = FileHandler()
+        self.character_data = self.file_handler.load()
 
     def update(self, data: tuple):
-        '''Update the character collection with a tuple of username and hero instance'''
+        '''Update the character collection with a
+        tuple of username and hero instance'''
         self.character_data[data[0]] = data[1]
 
     def get_names(self) -> list:

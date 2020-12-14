@@ -1,5 +1,4 @@
 import entities as e
-import saveLoad as s
 
 
 class CharacterCreation:
@@ -8,7 +7,7 @@ class CharacterCreation:
         self.hero = None
         self.choice = choice
         self.create_instance()
-        self.send_to_save((self.username, self.hero))
+        self.data = (self.username, self.hero)
 
     def create_instance(self):
         if self.choice == 'Knight':
@@ -18,5 +17,5 @@ class CharacterCreation:
         elif self.choice == 'Thief':
             self.hero = e.Thief()
 
-    def send_to_save(self, data):
-        s.FileHandler().save(data)
+    def send_to_save(self):
+        return self.data
