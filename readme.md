@@ -12,13 +12,13 @@ _Dungeon Run is a game where your goal is to have fun, and loot as many treasure
 ## **_Guide - How to play_**
 #
 __If you are ever unsure of what you can do while in the game just type '*? or help*'.__ 
-- [Create a character🧙](#Making-your-character🧙)
+- [Create a character🧙](#Making-your-character)
 - [Load your character](#Load-your-character)
 - [Start the game](#Start-the-game)
-- [Find treasures 💰](#Treasures💰)
-- [Combat⚔️](#Combat⚔️)
-- [Slay enemies🧟‍♀️](#Enemies🧟‍♀️)
-- [Winning conditions🏆](#Winning-conditions🏆)
+- [Find treasures 💰](#Treasures)
+- [Combat⚔️](#Combat)
+- [Slay enemies🧟‍♀️](#Enemies)
+- [Winning conditions🏆](#Winning-conditions)
 
 <br><br>
 ## **_Making your character🧙_**
@@ -51,13 +51,13 @@ To start playing a game you first need to do these steps:
 - Choose which corner of the map to start (north_east, north_west, south_east, south_west)
 
 <br><br>
-## **_Treasures💰_**
+## **_Treasures_** 💰
 #
 There are 5 different types of treasures you can run into.
 <br> They all have different spawn-chances. The lower procentage of them spawning, the bigger the loot.
 
 <br><br>
-## **_Combat⚔️_**
+## **_Combat_** ⚔️
 #
 In some rooms you will encounter monsters.  
 When in a combat scenario you have two options:
@@ -67,7 +67,7 @@ When in a combat scenario you have two options:
 Your attacking and escaping success depend on your stats and luck when rolling the dice.
 
 <br><br>
-## **_Enemies🧟‍♀️_**
+## **_Enemies_** 🧟‍♀️
 #
 _**There are 4 different enemies that you can run into. Those are:**_
 | Giantspider    |  Skeleton |        Orc |         Troll |
@@ -79,7 +79,7 @@ _**There are 4 different enemies that you can run into. Those are:**_
 | Chance: 20%    | Chance: 15%     | Chance: 10   | Chance: 5%   |
 
 <br><br>
-## **_Winning conditions🏆_**
+## **_Winning conditions_** 🏆
 #
 _The objective of the game is to get as much gold as you can. To escape the dungeon
 you need to find the room with an exit. When you find the exit room it will ask
