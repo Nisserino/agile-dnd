@@ -79,7 +79,7 @@ They all have different stats and one unique special ability.
 **Thief**: Critical hit, has a 25% chance of doing double damage every attack.
 ## Treasures
 Some rooms contain treasures, if there's monsters in the room you have to slay them before collecting the treasures.  
-Differet treasures have different values:
+Different treasures have different values:
 * Coin bag = 6 Gold
 * Jewlery = 10 Gold
 * Gems = 14 Gold
