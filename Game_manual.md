@@ -61,8 +61,9 @@ the amount of gold you have into the leaderboard. The leaderboard is ordered
 by which character had the most gold when dying.  
   
   
-## Misc
-**Hero stats**
+## Heroes
+There are 3 different heroes to pick from.  
+They all have different stats and one unique special ability.
 
 | Knight    | Thief | Wizard|
 |:------------- |:----------------|:-------------|
@@ -70,3 +71,16 @@ by which character had the most gold when dying.
 | Endurance: 9    | Endurance: 5 | Endurance: 4 |
 | Attack: 6       | Attack: 5    | Attack: 9    |
 | Agility: 4      | Agility: 7   | Agility: 5   |
+
+**Special abilities**
+
+**Knight**: Shield block, always blocks the first attack in a battle.  
+**Wizard**: Blinding light, makes monsters blind which increases your ability to escape by 80%  
+**Thief**: Critical hit, has a 25% chance of doing double damage every attack.
+## Treasures
+Some rooms contain treasures, if there's monsters in the room you have to slay them before collecting the treasures.  
+Differet treasures have different values:
+* Coin bag = 6 Gold
+* Jewlery = 10 Gold
+* Gems = 14 Gold
+* Treasure chest = 20 Gold
