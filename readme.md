@@ -77,7 +77,7 @@ There are 5 different types of treasures you can run into.
 
 
 <br><br>
-## **_Combat_**
+## **_Combat⚔️_**
 #
 In some rooms you will encounter monsters.  
 When in a combat scenario you have two options:
@@ -87,7 +87,7 @@ When in a combat scenario you have two options:
 Your attacking and escaping success depend on your stats and luck when rolling the dice.
 
 <br><br>
-## **_Enemies_**
+## **_Enemies🧟‍♀️_**
 #
 _**There are 4 different enemies that you can run into. Those are:**_
 | Giantspider    |  Skeleton |        Orc |         Troll |
@@ -107,7 +107,7 @@ Knight: Shield block, always blocks the first attack in a battle.<br>
 Wizard: Blinding light, makes monsters blind which increases your ability to escape by 80%<br>
 Thief: Critical hit, has a 25% chance of doing double damage every attack_
 <br><br>
-## **_Winning conditions_**
+## **_Winning conditions🏆_**
 #
 _The objective of the game is to get as much gold as you can. To escape the dungeon
 you need to find the room with an exit. When you find the exit room it will ask
@@ -120,7 +120,7 @@ the amount of gold you have into the leaderboard. The leaderboard is ordered
 by which character had the most gold when dying._
 
 <br><br>
-## **_Game board_**
+## **_Game board🗺️_**
 #
 **The different markers on the map are as follows:**
 <br>
