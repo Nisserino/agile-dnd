@@ -27,16 +27,16 @@ _**To play the game you need:**<br>_
 ## **_Guide - How to play_**
 #
 __If you are ever unsure of what you can do while in the game just type '*? or help*'.__ 
-- [Create a character🧙](#Making-your-character)
-- [Load your character](#Load-your-character)
-- [Start the game](#Start-the-game)
+- [Create a character🥊](#Making-your-character)
+- [Load your character🧙](#Load-your-character)
+- [Start the game🏃‍♂️](#Start-the-game)
 - [Find treasures💰](#Treasures)
 - [Combat⚔️](#Combat)
 - [Enemies🧟‍♀️](#Enemies)
 - [Winning conditions🏆](#Winning-conditions)
 - [Game board🗺️](#Game-board)
-- [Movement](#Movement)
-
+- [Movement🏃‍♂️](#Movement)
+- [Shop🛒](#Shop)
 <br><br>
 ## **_Making your character_**
 #
@@ -147,3 +147,10 @@ by which character had the most gold when dying._
 -   South
 -   East
 -   West
+<br>
+<br>
+## **_Shop_**
+#
+**At the end of each floor is a shop. At the shop you can buy potions and make your weapon stronger. Weapon buff gets removed once you die.<br><br>
+You pay with your gold.**
+
