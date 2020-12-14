@@ -69,6 +69,6 @@ class RoomDescription:
             "you can hear a muffled scream echoing between the walls"]
 
     def get_description(self):
-        return f'{random.choice(self.enter_room)}, '\
-               f'{random.choice(self.description)} and ' \
+        return f'{random.choice(self.enter_room)}\n'\
+               f'{random.choice(self.description)}\nand ' \
                f'{random.choice(self.senses)}'

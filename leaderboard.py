@@ -38,11 +38,11 @@ class Leaderboard:
 
     def print_top_x(self, x):
         scores = self.get_scores()
-        if x > len(scores):
-            x = len(scores)
-        elif len(scores) == 0:
+        if len(scores) == 0:
             print('There are no highscores yet')
             return
+        elif x > len(scores):
+            x = len(scores)
 
         for i in range(x):
             score = [scores[i][0], str(scores[i][1])]

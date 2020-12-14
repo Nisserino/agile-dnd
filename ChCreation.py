@@ -7,7 +7,7 @@ class CharacterCreation:
         self.hero = None
         self.choice = choice
         self.create_instance()
-        self.data = (self.username, self.hero)
+        self.data = (self.hero, self.username)
 
     def create_instance(self):
         if self.choice == 'Knight':

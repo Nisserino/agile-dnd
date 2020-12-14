@@ -3,6 +3,7 @@ from ChCreation import CharacterCreation as CC
 import saveLoad as SL
 import game_loop
 from leaderboard import Leaderboard
+from shoploop import ShopLoop
 
 
 class Menue_loop(cmd.Cmd):
@@ -31,6 +32,13 @@ class Menue_loop(cmd.Cmd):
             print(
                 'You need to write the character name after'
                 ' \'load_character\'')
+
+    def do_shop(self, arg):
+        'Enter the shop to spend some of your gold'
+        if self.character:
+            ShopLoop(self.character[0], self.character[1]).cmdloop()
+        else:
+            print('You need to load a character before you can start playing')
 
     def do_start_game(self, arg):
         'Start the game'
@@ -160,7 +168,7 @@ class CharacterCreationLoop(cmd.Cmd):
             self.data_handler.update(CC(user, 'Knight').send_to_save())
             return True
 
-    def do_theif(self, arg):
+    def do_thief(self, arg):
         'Create a thief'
         user = self.get_username()
         if user:
