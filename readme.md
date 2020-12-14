@@ -51,9 +51,10 @@ _When you start the game for the first time you need to create a new character. 
 | Endurance: 9  | Endurance: 5    | Endurance: 4 |
 | Attack: 6     | Attack: 5       | Attack: 9    |
 | Agility: 4    | Agility: 7      | Agility: 5   |
-<br><br>
-_***Special abilities:***<br>_
-Each class have their own special ability.
+
+<br><br> 
+
+***Each class have their own special ability***.
 <br>
 Knight: Shield block, always blocks the first attack in a battle.<br>
 Wizard: Blinding light, makes monsters blind which increases your ability to escape by 80%<br>
