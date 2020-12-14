@@ -94,8 +94,23 @@ class DungeonMaster:
         room_status = self.room_status[self.get_pos()]
         enemies = room_status['enemies']
         treasure = room_status['treasure']
+        self.print_treasure_enemies(enemies, treasure)
+
+    def print_treasure_enemies(self, enemies, treasure):
+        if len(enemies) == 0:
+            found_enemies = 'No enemies found\n'
+        else:
+            found_enemies = ''
+            for enemy in enemies:
+                found_enemies += enemy.name + '\n'
+        if len(treasure) == 0:
+            found_treasure = 'No treasure found\n'
+        else:
+            found_treasure = ''
+            for treasures in treasure:
+                found_treasure += treasures[0] + ' ' + str(treasures[1]) + '\n'
         room_info = (
-                f'Enemies: {enemies} \n'
-                f'Treasures: {treasure}'
+                f'Enemies:\n{found_enemies} \n'
+                f'Treasures:\n{found_treasure}'
         )
         print(room_info)
