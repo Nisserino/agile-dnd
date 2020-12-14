@@ -34,7 +34,7 @@ __If you are ever unsure of what you can do while in the game just type '*? or h
 - [Movement](#Movement)
 
 <br><br>
-## **_Making your character🧙_**
+## **_Making your character_**
 #
 _When you start the game for the first time you need to create a new character. <br> Typing **new_character** will give you the option to choose which character you want to play as. After that you get to decide your name._
 
@@ -64,7 +64,7 @@ To start playing a game you first need to do these steps:
 - Choose which corner of the map to start (north_east, north_west, south_east, south_west)
 
 <br><br>
-## **_Treasures💰_**
+## **_Treasures_**
 #
 There are 5 different types of treasures you can run into.
 <br> They all have different spawn-chances. The lower procentage of them spawning, the bigger the loot.<br><br>
@@ -77,7 +77,7 @@ There are 5 different types of treasures you can run into.
 
 
 <br><br>
-## **_Combat⚔️_**
+## **_Combat_**
 #
 In some rooms you will encounter monsters.  
 When in a combat scenario you have two options:
@@ -87,7 +87,7 @@ When in a combat scenario you have two options:
 Your attacking and escaping success depend on your stats and luck when rolling the dice.
 
 <br><br>
-## **_Enemies🧟‍♀️_**
+## **_Enemies_**
 #
 _**There are 4 different enemies that you can run into. Those are:**_
 | Giantspider    |  Skeleton |        Orc |         Troll |
@@ -107,7 +107,7 @@ Knight: Shield block, always blocks the first attack in a battle.<br>
 Wizard: Blinding light, makes monsters blind which increases your ability to escape by 80%<br>
 Thief: Critical hit, has a 25% chance of doing double damage every attack_
 <br><br>
-## **_Winning conditions🏆_**
+## **_Winning conditions_**
 #
 _The objective of the game is to get as much gold as you can. To escape the dungeon
 you need to find the room with an exit. When you find the exit room it will ask
@@ -120,7 +120,7 @@ the amount of gold you have into the leaderboard. The leaderboard is ordered
 by which character had the most gold when dying._
 
 <br><br>
-## **_Game board🗺️_**
+## **_Game board_**
 #
 **The different markers on the map are as follows:**
 <br>
