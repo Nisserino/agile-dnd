@@ -1,4 +1,4 @@
-#Dungeon run
+# Dungeon run
 You're in a dungeon and the objective of the game is to clear the rooms of potential foes and gather any treasures that
 you may find. The only way for you to escape with your life and gold intact is to find the exit that is hidden somewhere
 in the dungeon.
@@ -26,7 +26,7 @@ To start playing a game you first need to do these steps:
 
 You have now started a new game and should see a game board
 
-##Game board
+## Game board
 The different markers on the map are as follows:  
 * X = Unknown room
 * P = Your position
@@ -34,7 +34,7 @@ The different markers on the map are as follows:
 * E = Room with an exit
 * R = You have escaped from this room  
 
-##Movement
+## Movement
 To walk around the dungeon you decide which way to go by typing:
 * North
 * South
@@ -49,7 +49,7 @@ When in a combat scenario you have two options:
 
 Your attacking and escaping success depend on your stats and luck when rolling the dice.
 
-##Winning conditions
+## Winning conditions
 The objective of the game is to get as much gold as you can. To escape the dungeon
 you need to find the room with an exit. When you find the exit room it will ask
 if you want to leave or not.  
@@ -61,5 +61,5 @@ the amount of gold you have into the leaderboard. The leaderboard is ordered
 by which character had the most gold when dying.  
   
   
-##Misc
+## Misc
 **Hero stats**
