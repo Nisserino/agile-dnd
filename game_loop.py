@@ -52,7 +52,7 @@ class Bouncer():
         if action == 'move':
             if self.dm.room_status[self.dm.get_pos()]['escape']:
                 self.place_marker('R')  # Might be redundant
-            MoveLoop(self.dm, self.username).cmdloop(self.room_text)
+            MoveLoop(self.dm, self.username).cmdloop()
         elif action == 'combat':
             if self.spawn_checker():
                 CombatLoop(self.dm, self.username).cmdloop(self.room_text)
