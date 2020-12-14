@@ -8,7 +8,7 @@
 __<h1>Overview</h1>__
 _Dungeon Run is a game where your goal is to have fun, and loot as many treasures as possible. Inside the treasures you can find gold. The gold you loot is what defines your highscore. <br> Be careful, there are enemies waiting for you along the way.<br> You can fight the enemies and kill them, or sometimes run away from them. <br> Once you have found all the treasures in a  room, you get moved to another room._
 
-__<h2>Mechanics:<h2>__
+**Mechanics:**<br>
 The game is object-oriented.<br>
 _During the game experience there are 'hidden dices' that are being thrown in the background. This is what makes the experience of playing the game variate every time you play it. When you spawn, the exit door is randomly placed somewhere not too close to you. Spawning enemies, treasures are also random._
 
